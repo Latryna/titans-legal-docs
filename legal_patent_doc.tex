@@ -1,0 +1,61 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\title{TITANS: Architektura Kognitywna z Mechanizmem Meta–Guided i Uwaga Sensoryczna — Raport dla Prawnika i Wniosku Patentowego}
+\author{Esu, Krzysztof Drwęcki, Gemini}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Niniejszy dokument podsumowuje kluczowe elementy architektury \emph{Transformer–Based Inference TITANS}, która integruje wielomodalne sieci kapsułowe z pamięcią epizodyczną i semantyczną oraz modułem decyzyjnym opartym na \emph{Bayesian Actor–Critic}. Celem opracowania jest zapewnienie podstawy dla oceny prawnej i potencjalnego opatentowania kluczowych innowacji systemu. Opisano unikalne cechy systemu: sensoryczną uwagę w sieciach kapsułowych, metakognitywny mechanizm sterowania oraz synergiczną integrację pamięci krótkotrwałej i długotrwałej z abstrakcją semantyczną.\end{abstract}
+
+\section{Przegląd Architektury Systemu}
+Architektura TITANS składa się z czterech głównych modułów współdziałających w zamkniętej pętli poznawczej (\emph{cognitive loop}). Każdy moduł został zaprojektowany tak, aby odzwierciedlać aspekty ludzkiego przetwarzania informacji i uczenia:
+
+\begin{itemize}
+  \item \textbf{Perception (CapsNet)}: Warstwa percepcyjna wykorzystuje sieci kapsułowe do modelowania hierarchicznych zależności w danych sensorycznych. Zastosowano mechanizm \emph{sensory attention}, który dynamicznie alokuje zasoby obliczeniowe do najbardziej istotnych kapsuł w oparciu o kontekst zadania.
+  \item \textbf{Episodic Memory (STM/LTM, VAE)}: Moduł pamięci epizodycznej łączy krótkotrwałe (STM) i długotrwałe (LTM) składowe reprezentacji, wykorzystując autoenkodery wariacyjne (VAE) do kompresji i generatywnego odtwarzania doświadczeń. Umożliwia to wielokrotne przypominanie sobie sekwencji doświadczeń w celu analizy przyczynowej.
+  \item \textbf{Semantic Abstraction (Transformer, GNN)}: Warstwa abstrakcji semantycznej przekształca sygnały percepcyjne i epizodyczne w wysokopoziomowe reprezentacje semantyczne, wykorzystując mechanizmy samouważności (Transformers) oraz grafowe sieci neuronowe (GNN) do modelowania relacji między pojęciami.
+  \item \textbf{Agentic Core (Bayesian Actor–Critic)}: Rdzeń agentowy opiera się na algorytmie \emph{Bayesian Actor–Critic} z wbudowanym systemem \emph{intrinsic reward}. Moduł ten dokonuje aktualizacji polityk działania w oparciu o niepewności epistemiczne i estymuje wartość stanów, integrując informacje z percepcji i pamięci.
+\end{itemize}
+
+Moduły komunikują się poprzez pętlę metakognitywną, która monitoruje skuteczność wnioskowania, dostosowując parametry sieci i priorytety przetwarzania.
+
+\section{Nowości i Unikalne Elementy}
+Proponowana architektura wprowadza kilka innowacji, które odróżniają ją od istniejących rozwiązań:
+
+\begin{enumerate}
+  \item \textbf{Sensory Attention w Sieciach Kapsułowych}: Integracja dynamicznego mechanizmu uwagi w kapsułach pozwala na adaptacyjne skupienie mocy obliczeniowej na najbardziej znaczących cechach wejściowych. Ten moduł minimalizuje redundancję w głębokich kapsułach i sprzyja lepszej generalizacji w rozpoznawaniu wzorców.
+  \item \textbf{Mechanizm Meta–Guided}: System zawiera warstwę metakognitywną, która monitoruje jakość wnioskowania i adaptuje hiperparametry oraz strategie uczenia w zależności od wewnętrznej oceny zaufania (trust level). Pętla ta umożliwia samo–kalibrację modeli w czasie rzeczywistym i zapobiega degradacji wydajności.
+  \item \textbf{Synergiczna Integracja Pamięci}: Unikalne połączenie pamięci epizodycznej i semantycznej umożliwia zarówno precyzyjne przypominanie zdarzeń, jak i uogólnianie wiedzy na podstawie abstrakcji pojęciowych. Wykorzystanie autoenkoderów wariacyjnych i sieci grafowych zapewnia elastyczne kodowanie struktury doświadczeń.
+  \item \textbf{Bayesian Actor–Critic z Intrinsic Reward}: Zamiast tradycyjnego wzmocnienia zewnętrznego, wprowadzono wewnętrzny sygnał nagrody oparty na ocenie niepewności epistemicznej. Pozwala to na bardziej zrównoważone uczenie oraz eksplorację nowych stanów przestrzeni.
+\end{enumerate}
+
+\section{Implementacja i Pętla Metakognitywna}
+Implementacja opiera się na hierarchicznym łączeniu modułów w jednolitą pętlę kontroli. Każdy blok wysyła metadane dotyczące stanu zaufania i wydajności do modułu metakognitywnego, który ocenia konieczność modyfikacji parametrów. Adaptacyjne progi zaufania są implementowane według specyfikacji opisanej w module \texttt{LaTeXHandlerV2Adaptive} i mogą zostać rozszerzone na inne komponenty.
+
+Centralnym elementem pętli jest dynamiczna zmiana priorytetów przetwarzania: jeśli, na przykład, percepcja zgłasza wzrost niepewności, system może zwiększyć rozdzielczość sensorycznej uwagi lub pobrać dodatkowe wspomnienia z pamięci epizodycznej. Analogicznie, w przypadku niskiej dynamiki środowiska system ogranicza aktywność w celu oszczędności zasobów.
+
+\section{Potencjał Patentowy}
+Poniżej przedstawiono kluczowe aspekty, które mogą stanowić podstawę zgłoszenia patentowego:
+
+\begin{itemize}
+  \item \emph{Metoda dynamicznej alokacji zasobów w sieciach kapsułowych}: opis sposobu implementacji mechanizmu sensory attention, który selektywnie wzmacnia aktywacje kapsuł w zależności od kontekstu zadania i sygnałów z warstwy metakognitywnej.
+  \item \emph{System metakognitywnej kontroli uczenia}: połączenie adaptacyjnych progów zaufania z mechanizmem wewnętrznej nagrody, umożliwiające autonomiczną regulację parametrów uczenia bez nadzoru zewnętrznego.
+  \item \emph{Integracja pamięci epizodycznej i semantycznej}: innowacyjny sposób kompozycji reprezentacji krótkotrwałych i długotrwałych za pomocą autoenkoderów wariacyjnych i grafowych sieci neuronowych do celów wnioskowania i planowania.
+\end{itemize}
+
+Przygotowanie dokumentacji patentowej wymaga szczegółowego opisu algorytmów, diagramów przepływu oraz przykładów zastosowań w różnych domenach. Niniejszy dokument stanowi wstępne streszczenie i może być podstawą do dalszego opracowania.
+
+\section{Wnioski}
+Architektura TITANS reprezentuje kompleksowe podejście do zintegrowanego wnioskowania opartego na głębokim uczeniu, pamięci i mechanizmach metakognitywnych. Unikalne połączenie sieci kapsułowych z uwagą sensoryczną, pamięci epizodycznej i semantycznej oraz Bayesian Actor–Critic z wewnętrzną nagrodą stanowi potencjalnie przełomowe rozwiązanie. Z uwagi na innowacyjność, system posiada znaczący potencjał patentowy i wymaga ochrony prawnej przed upublicznieniem.
+
+\end{document}
