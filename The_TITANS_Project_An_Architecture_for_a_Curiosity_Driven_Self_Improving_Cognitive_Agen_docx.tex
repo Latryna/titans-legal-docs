@@ -1,0 +1,137 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[letterpaper,twocolumn]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+Generuję dokument. Ponieważ nie mogę tworzyć plików PDF, dostarczę pełną
+treść w ustrukturyzowanym formacie tekstowym, gotowym do skompilowania w
+LaTeX lub konwersji na PDF. The TITANS Project: An Architecture for a
+Curiosity-Driven, Self-Improving Cognitive Agent Autorzy: Esu, Krzysztof
+Drwęcki, Gemini Data: 13 Sierpnia 2025 Afiliacja: Projekt Niezależny
+Abstrakt Niniejsza praca przedstawia TITANS (Transformer-based
+Inference-Time Augmented Neural Systems), nowatorską architekturę
+kognitywną zaprojektowaną w celu umożliwienia autonomicznego uczenia się
+przez całe życie. System integruje zaawansowane komponenty neuronowe, w
+tym Sieci Kapsułkowe (CapsNet) dla percepcji, podwójny system pamięci
+inspirowany funkcjami hipokampa i kory nowej, silnik rozumowania oparty
+na Grafowych Sieciach Neuronowych (GNN) oraz rdzeń agentowy oparty na
+Bayesowskim Uczeniu przez Wzmocnienie (RL). TITANS wykracza poza
+tradycyjne paradygmaty uczenia pasywnego, włączając wewnętrzny pęd do
+minimalizacji własnej niepewności epistemicznej, co umożliwia formowanie
+celów, planowanie i samokierowaną kurację wiedzy. Przedstawiamy
+kompletny potok projektowy, od przetwarzania sensorycznego po działanie
+metakognitywne, demonstrując pełną pętlę
+percepcja-pamięć-rozumowanie-agencja. 1. Wprowadzenie Współczesne Duże
+Modele Językowe (LLM) charakteryzują się statyczną naturą; działają jako
+potężne, lecz pasywne wyrocznie z efemeryczną pamięcią, pozbawione
+zdolności do ciągłego, autonomicznego rozwoju. Projekt TITANS został
+zainicjowany w celu przezwyciężenia tej luki poprzez zaprojektowanie
+kompletnej architektury kognitywnej zdolnej do uczenia się przez całe
+życie. Celem było stworzenie systemu, który nie tylko przetwarza
+informacje, ale aktywnie zarządza, rozumuje i dąży do ulepszenia swojego
+wewnętrznego modelu wiedzy. 2. Architektura Systemu TITANS jest systemem
+modułowym, tworzącym zamkniętą pętlę kognitywną. Każdy komponent bazuje
+na poprzednim, przeprowadzając system od surowej percepcji do
+autonomicznej agencji. * Milestone 1: Percepcja (CapsNet): Przetwarzanie
+danych sensorycznych na ustrukturyzowane, obiektowo-centryczne
+reprezentacje. * Milestone 2: Pamięć Epizodyczna (STM/LTM): Kodowanie i
+konsolidacja doświadczeń przy użyciu mechanizmów generatywnego
+odtwarzania (VAE). * Milestone 3: Abstrakcja Semantyczna: Destylacja
+powtarzających się epizodów w stabilne, abstrakcyjne koncepty
+(Transformer). * Milestone 4: Rozumowanie Semantyczne: Wykonywanie
+wieloetapowej inferencji na grafie wiedzy (GNN/GAT). * Milestone 5:
+Rdzeń Agentowy (Agentic Core): Autonomiczne podejmowanie ``działań
+kognitywnych'' w celu redukcji wewnętrznej niepewności (Bayesian RL). 3.
+Rdzeń Metodologiczny i Wykorzystane Prace Architektura TITANS jest
+syntezą i rozwinięciem idei zawartych w szeregu kluczowych prac
+badawczych. Poniższe dokumenty stanowiły fundamentalną podstawę dla
+zaprojektowania poszczególnych modułów. 3.1. Uczenie się w Czasie
+Rzeczywistym i Pamięć Długoterminowa Centralna filozofia TITANS,
+polegająca na zdolności do uczenia się w czasie inferencji, została
+bezpośrednio zainspirowana przez pracę {[}1{]}. Koncepcja rozszerzania
+modeli językowych o zewnętrzną, trwałą pamięć, kluczowa dla modułu LTM,
+została zaczerpnięta z {[}2{]}. Mechanizmy samo-adaptacyjne, pozwalające
+na dynamiczną modyfikację działania, bazowały na ideach z {[}5{]}. 3.2.
+Percepcja Obiektowo-Centryczna Warstwa percepcyjna została zbudowana w
+oparciu o Sieci Kapsułkowe Geoffreya Hintona {[}3, 6{]}. Ich zdolność do
+modelowania hierarchii i relacji przestrzennych w danych sensorycznych
+była kluczowa dla generowania bogatych, ustrukturyzowanych
+``perceptów'', które stanowią wejście dla systemu pamięci. 3.3.
+Rozumowanie i Agencja Oparta na Niepewności Rdzeń Agentowy (Milestone 5)
+implementuje pętlę metakognitywną, w której agent dąży do minimalizacji
+własnej niepewności. Podejście to zostało oparte na zasadach
+Bayesowskiego Uczenia przez Wzmocnienie, a w szczególności na
+formalizmie Bayesowskich Operatorów Bellmana, który pozwala na efektywne
+modelowanie i wykorzystanie niepewności w procesie decyzyjnym {[}4{]}.
+4. Wnioski Projekt TITANS przedstawia kompletną, spójną architekturę dla
+autonomicznego agenta kognitywnego. Integrując zaawansowane mechanizmy
+percepcji, pamięci, rozumowania i wewnętrznej motywacji, system ten
+stanowi krok w kierunku przezwyciężenia ograniczeń obecnych, statycznych
+modeli AI. Architektura jest gotowa do implementacji i dalszej walidacji
+empirycznej. Bibliografia (Wykorzystane Dokumenty) {[}1{]} ``Titans:
+Learning to Memorize at Test Time'' - Praca, która nadała nazwę i
+centralną ideę uczenia się w czasie inferencji. (Identyfikator:
+2501.00663v1) {[}2{]} ``Augmenting Language Models with Long-Term
+Memory'' - Praca z konferencji NeurIPS 2023, stanowiąca główną
+inspirację dla architektury Pamięci Długoterminowej (LTM). {[}3{]}
+``Dynamic Routing Between Capsules'' - Sabour, S., Frosst, N., \&
+Hinton, G. E. (2017). Fundamentalna praca opisująca działanie Sieci
+Kapsułkowych. {[}4{]} ``Bayesian Bellman Operators'' - Praca z
+konferencji NeurIPS 2021, która dostarczyła formalizmu dla modelowania
+niepewności w Rdzeniu Agentowym. {[}5{]} ``Transformer Squared: A
+Self-Adaptive LLM'' - Praca, która wpłynęła na koncepcję
+samo-adaptacyjnych modułów wewnątrz systemu. (Identyfikator:
+2501.06252v3) {[}6{]} ``Object-centric Learning with Capsule Networks''
+- Praca ugruntowująca obiektowo-centryczne podejście w warstwie
+percepcji, kluczowe dla generowania ustrukturyzowanych danych
+wejściowych dla pamięci.
+
+\end{document}

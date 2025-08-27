@@ -1,0 +1,279 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[letterpaper,twocolumn]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+Analiza. Kontynuuję plan wdrożeniowy, rozbudowując architekturę o
+kolejne kamienie milowe zgodnie z ustalonym protokołem. SEKCJA 5: PLAN
+IMPLEMENTACJI - MILESTONE 2 (Pamięć Epizodyczna) 5.1. Cel
+Architektoniczny Celem tego etapu jest implementacja dwuwarstwowego
+systemu pamięci, zdolnego do ciągłego przyswajania ``doświadczeń''
+(wektorów z modułu percepcji) oraz ich konsolidacji i generalizacji w
+tle. 5.2. Struktura Repozytorium (Rozszerzenie) src/ └── titans/ ├──
+\textbf{init}.py ├── memory/ │ ├── \textbf{init}.py │ ├── ltm.py \#
+Pamięć Długoterminowa i Agent Generatywnego Odtwarzania │ └── vae.py \#
+Wariacyjny Autoenkoder do konsolidacji └── perception/ └── \ldots{}
+
+5.3. Kod: Rdzeń Pamięci Epizodycznej (src/titans/memory/ltm.py) \# FILE:
+src/titans/memory/ltm.py
+
+import torch import torch.nn as nn from dataclasses import dataclass
+from typing import List from .vae import ConsolidationVAE
+
+@dataclass class MemorySlot: ``\,````Structure to hold memory traces
+with metadata.''``\,'' vector: torch.Tensor creation\_step: int
+last\_access\_step: int num\_accesses: int = 1
+
+class EpisodicLTM: ``\,``\,'' Manages episodic memory traces and
+orchestrates the generative replay process for consolidation and
+generalization. ``\,``\,'' def \textbf{init}(self, embed\_dim: int,
+latent\_dim: int, max\_slots: int = 1000): self.memory:
+List{[}MemorySlot{]} = {[}{]} self.max\_slots = max\_slots self.vae =
+ConsolidationVAE(embed\_dim, latent\_dim) self.vae\_optimizer =
+torch.optim.Adam(self.vae.parameters(), lr=1e-4) self.step\_counter = 0
+
+def add\_experience(self, vector: torch.Tensor): ``\,````Adds a new
+perceptual vector as an episodic memory.''``\,'' self.step\_counter += 1
+if len(self.memory) \textgreater= self.max\_slots: \# Simple forgetting
+mechanism: remove the least accessed slot self.memory.sort(key=lambda s:
+s.num\_accesses) self.memory.pop(0)
+
+\begin{verbatim}
+   slot = MemorySlot(vector, self.step_counter, self.step_counter)
+   self.memory.append(slot)
+\end{verbatim}
+
+def run\_consolidation\_cycle(self, num\_seeds=5, samples\_per\_seed=10,
+epochs=50): ``\,``\,'' Performs a ``dreaming'' cycle: selects important
+memories, fine-tunes the VAE, and generates synthetic variations for
+downstream tasks. ``\,``\,'' if len(self.memory) \textless{} num\_seeds:
+return None \# Not enough memories to consolidate
+
+\begin{verbatim}
+   # 1. Select most salient memories (seeds) based on access frequency
+   seeds = sorted(self.memory, key=lambda s: s.num_accesses, reverse=True)[:num_seeds]
+   seed_vectors = torch.stack([s.vector for s in seeds])
+
+   # 2. Fine-tune the VAE on these important experiences
+   self.vae.train()
+   for _ in range(epochs):
+       self.vae_optimizer.zero_grad()
+       recon, mu, log_var = self.vae(seed_vectors)
+       loss = self.vae.loss_function(recon, seed_vectors, mu, log_var)
+       loss.backward()
+       self.vae_optimizer.step()
+   
+   # 3. Generate synthetic memories ("dreams") from the latent space
+   self.vae.eval()
+   with torch.no_grad():
+       _, mu, log_var = self.vae(seed_vectors)
+       dreams = []
+       for i in range(num_seeds):
+           for _ in range(samples_per_seed):
+               z = self.vae.reparameterize(mu[i], log_var[i])
+               dream_vec = self.vae.decoder(z)
+               dreams.append(dream_vec)
+   
+   return torch.cat([seed_vectors, torch.stack(dreams)], dim=0)
+\end{verbatim}
+
+5.4. Instrukcje dla Agenta Autonomicznego (Testowanie Milestone 2)
+\#!/bin/bash set -e
+
+\hypertarget{instruction-for-autonomous-agent-titans-m2-test-script}{%
+\section{--- INSTRUCTION FOR AUTONOMOUS AGENT: TITANS M2 TEST SCRIPT
+---}\label{instruction-for-autonomous-agent-titans-m2-test-script}}
+
+cd /opt/titans
+
+\hypertarget{step-1-execute-the-milestone-2-test-script}{%
+\section{Step 1: Execute the Milestone 2 test
+script}\label{step-1-execute-the-milestone-2-test-script}}
+
+echo ``INFO: Running Milestone 2 (Episodic Memory) test\ldots{}'' \#
+Create a dummy test file for this purpose cat \textless\textless{} `EOF'
+\textgreater{} src/titans/memory/test\_m2.py import torch from
+titans.memory.ltm import EpisodicLTM
+
+def run\_test(): print(``--- Testing M2: EpisodicLTM and Consolidation
+---'') EMBED\_DIM, LATENT\_DIM = 64, 16 ltm = EpisodicLTM(EMBED\_DIM,
+LATENT\_DIM, max\_slots=20)
+
+\# 1. Populate memory with experiences for i in range(25): vec =
+torch.randn(EMBED\_DIM) ltm.add\_experience(vec) \# Simulate higher
+access for important memories if i \% 5 == 0:
+ltm.memory{[}-1{]}.num\_accesses = 10
+
+print(f''LTM populated. Current size: \{len(ltm.memory)\} slots.'')
+assert len(ltm.memory) == 20 \# Verifies forgetting mechanism
+
+\# 2. Run a consolidation cycle replay\_batch =
+ltm.run\_consolidation\_cycle() assert replay\_batch is not None,
+``Consolidation cycle failed to run.''
+
+\# Expected size = num\_seeds + (num\_seeds * samples\_per\_seed) = 5 +
+(5\emph{10) = 55 expected\_size = 5 + (5 } 10) assert
+replay\_batch.shape{[}0{]} == expected\_size, f''Incorrect replay batch
+size. Expected \{expected\_size\}, got \{replay\_batch.shape{[}0{]}\}''
+
+print(f''Consolidation successful. Generated replay batch of size
+\{replay\_batch.shape{[}0{]}\}.'') print(``SUCCESS: Milestone 2 test
+passed.'')
+
+if \textbf{name} == ``\textbf{main}'': run\_test() EOF
+
+\hypertarget{run-the-test}{%
+\section{Run the test}\label{run-the-test}}
+
+python src/titans/memory/test\_m2.py
+
+SEKCJA 6: PLAN IMPLEMENTACJI - MILESTONE 3 (Abstrakcja Semantyczna) 6.1.
+Cel Architektoniczny Implementacja mechanizmu, który przetwarza
+skonsolidowane zbiory pamięci epizodycznej (wyjście z Milestone 2) w
+stabilne, abstrakcyjne wektory koncepcyjne, tworząc podstawę dla pamięci
+semantycznej. 6.2. Struktura Repozytorium (Rozszerzenie) src/ └──
+titans/ ├── \ldots{} ├── memory/ │ ├── \ldots{} │ └── semantic.py \#
+Magazyn Pamięci Semantycznej └── reasoning/ ├── \textbf{init}.py └──
+abstraction.py \# Sieć Abstrakcji
+
+6.3. Kod: Rdzeń Abstrakcji Semantycznej
+(src/titans/reasoning/abstraction.py) \# FILE:
+src/titans/reasoning/abstraction.py
+
+import torch import torch.nn as nn
+
+class AbstractionNetwork(nn.Module): ``\,``\,'' Distills a sequence of
+related episodic memory vectors into a single, abstract semantic vector
+using a Transformer Encoder. ``\,``\,'' def \textbf{init}(self,
+embed\_dim: int, num\_heads: int, num\_layers: int):
+super().\_\_init\_\_() self.cls\_token = nn.Parameter(torch.randn(1, 1,
+embed\_dim))
+
+\begin{verbatim}
+   encoder_layer = nn.TransformerEncoderLayer(
+       d_model=embed_dim, 
+       nhead=num_heads, 
+       batch_first=True,
+       dim_feedforward=embed_dim * 4
+   )
+   self.transformer_encoder = nn.TransformerEncoder(
+       encoder_layer, 
+       num_layers=num_layers
+   )
+\end{verbatim}
+
+def forward(self, episodic\_batch: torch.Tensor) -\textgreater{}
+torch.Tensor: ``\,``\,'' Args: episodic\_batch (torch.Tensor): Shape
+{[}batch\_size, seq\_len, embed\_dim{]} Returns: torch.Tensor: A single
+semantic vector {[}batch\_size, embed\_dim{]} ``\,``\,'' cls\_tokens =
+self.cls\_token.expand(episodic\_batch.shape{[}0{]}, -1, -1)
+input\_sequence = torch.cat({[}cls\_tokens, episodic\_batch{]}, dim=1)
+
+\begin{verbatim}
+   output = self.transformer_encoder(input_sequence)
+   
+   # The output corresponding to the CLS token is the abstracted semantic vector
+   semantic_vector = output[:, 0, :]
+   return semantic_vector
+\end{verbatim}
+
+6.4. Instrukcje dla Agenta Autonomicznego (Testowanie Milestone 3)
+\#!/bin/bash set -e
+
+\hypertarget{instruction-for-autonomous-agent-titans-m3-test-script}{%
+\section{--- INSTRUCTION FOR AUTONOMOUS AGENT: TITANS M3 TEST SCRIPT
+---}\label{instruction-for-autonomous-agent-titans-m3-test-script}}
+
+cd /opt/titans
+
+\hypertarget{step-1-execute-the-milestone-3-test-script}{%
+\section{Step 1: Execute the Milestone 3 test
+script}\label{step-1-execute-the-milestone-3-test-script}}
+
+echo ``INFO: Running Milestone 3 (Semantic Abstraction) test\ldots{}''
+\# Create a dummy test file cat \textless\textless{} `EOF'
+\textgreater{} src/titans/reasoning/test\_m3.py import torch from
+titans.reasoning.abstraction import AbstractionNetwork
+
+def run\_test(): print(``--- Testing M3: Semantic Abstraction Network
+---'') EMBED\_DIM, NUM\_HEADS, NUM\_LAYERS = 64, 4, 2 BATCH\_SIZE,
+SEQ\_LEN = 8, 15
+
+\# 1. Instantiate the network abstraction\_net =
+AbstractionNetwork(EMBED\_DIM, NUM\_HEADS, NUM\_LAYERS)
+
+\# 2. Simulate a replay batch (output from M2) \# This represents a
+batch of consolidated experiences related to one concept replay\_batch =
+torch.randn(BATCH\_SIZE, SEQ\_LEN, EMBED\_DIM)
+
+\# 3. Process the batch to get a semantic vector semantic\_vector =
+abstraction\_net(replay\_batch)
+
+\# 4. Verification assert semantic\_vector is not None, ``Abstraction
+network failed to produce an output.'' assert semantic\_vector.shape ==
+(BATCH\_SIZE, EMBED\_DIM), f''Incorrect output shape. Expected
+(\{BATCH\_SIZE\}, \{EMBED\_DIM\}), got \{semantic\_vector.shape\}''
+
+print(f''Abstraction successful. Produced semantic vector of shape
+\{semantic\_vector.shape\}.'') print(``SUCCESS: Milestone 3 test
+passed.'')
+
+if \textbf{name} == ``\textbf{main}'': run\_test() EOF
+
+\hypertarget{run-the-test-1}{%
+\section{Run the test}\label{run-the-test-1}}
+
+python src/titans/reasoning/test\_m3.py
+
+Kontynuuję z Milestone 4 i 5 w następnej odpowiedzi, aby zachować
+klarowność.
+
+\end{document}

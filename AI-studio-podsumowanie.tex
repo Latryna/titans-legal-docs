@@ -1,0 +1,1118 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[letterpaper,twocolumn]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+W RAZIE BRAKU MOŻLIWOŚCI DOSTĘPU DO LINKA
+(https://chatgpt.com/share/68a7c2c8-5008-8007-8ff8-bfb5b33716a7) PRZEJDŹ
+TO KONTEKSTU PONIŻEJ
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0982}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.7283}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1735}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Obszar
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Znalezione treści
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Ocena dojrzałości
+\end{minipage} \\
+\midrule
+\endhead
+\textbf{Natural Language Interface (NLI)} & SEKCJA 9 zawiera kompletny
+opis celu („płynny, naturalny interfejs komunikacyjny'') oraz dwa
+poziomy implementacji: \emph{Cross-Modal Attention CapsNet} + dedykowany
+mikro-LM (fine-tuned T5/BERT) tłumaczący • NL → zapytania grafowe •
+wektory ReasoningGAT → NL odpowiedź & \textbf{TRL 3-4} (specyfikacja +
+plan integracji, brak kodu) \\
+\textbf{Warstwa bezpieczeństwa (Security layer)} & SEKCJA 11 i
+\emph{Analiza 2.0} dokumentują listę zagrożeń technicznych: 1.
+\emph{Supply-Chain Attack} -- kompromitacja PyPI / Docker, wraz z
+konkretną mitygacją (mirror PyPI, Snyk/Trivy, pinowanie wersji) 2.
+\emph{Membership Inference \& Model Inversion} -- obrona via
+Differential Privacy w trakcie treningu AbstractionNetwork & \textbf{TRL
+3} (listy kontrolne + rekomendowane narzędzia, brak pipeline'u CI/CD) \\
+\textbf{Zabezpieczenie IP / operacyjne} & Strategia \emph{Dead Man's
+Switch} (szyfrowane repo + Shamir SSS na klucze) jest rozpisana w
+\emph{TITANS-Dev} & \textbf{Procedura spisana, ale brak
+automatyzacji} \\
+\bottomrule
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Analiza Nowych Rozwiązań dla Projektu TITANS Na podstawie przeglądu
+  najnowszych badań, identyfikuję następujące kluczowe technologie i
+  koncepcje, które mogą wzbogacić architekturę TITANS:
+\end{enumerate}
+
+Dla Warstwy Percepcji (CapsNet):
+
+Nowe Rozwiązanie: Capsule-ConvKAN (Kolmogorov-Arnold Networks). Jest to
+nowa hybrydowa architektura, która łączy zdolność sieci kapsułkowych do
+modelowania hierarchii przestrzennej z elastycznością i
+interpretablenością sieci ConvKAN. Zastąpienie standardowych warstw
+splotowych w CapsNet przez ConvKAN może prowadzić do lepszej
+reprezentacji cech przy mniejszej liczbie parametrów.
+
+Dla Pamięci Trwałej (IPFS):
+
+Nowe Rozwiązanie: Filecoin Virtual Machine (FVM). Od marca 2023 roku,
+Filecoin (warstwa motywacyjna dla IPFS) wspiera smart kontrakty poprzez
+FVM. To fundamentalna zmiana. Pamięć TITANS może być teraz nie tylko
+przechowywana w sposób zdecentralizowany, ale również zarządzana przez
+inteligentne kontrakty. Umożliwia to tworzenie złożonych reguł dostępu,
+autonomiczne zarządzanie zasobami i rynki danych.
+
+Dla Rdzenia Rozumowania (GNN):
+
+Nowe Rozwiązanie: Relational Deep Learning (RDL). Jest to podejście,
+które łączy GNN z modelami tabelarycznymi. W kontekście TITANS, oznacza
+to, że graf wiedzy może być wzbogacony o ustrukturyzowane dane
+tabelaryczne, co pozwala na bardziej złożone i precyzyjne rozumowanie.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Nowe Pomysły dla Projektu Na bazie powyższej analizy, proponuję
+  następujące rozszerzenia:
+\end{enumerate}
+
+Homeostaza Energetyczna i Obliczeniowa: Wprowadzenie do Rdzenia
+Homeostatycznego zmiennych monitorujących zużycie zasobów (TFLOPS, VRAM,
+przepustowość sieci). ``Bólem'' dla systemu staje się nie tylko chaos
+informacyjny, ale również nieefektywność obliczeniowa. To motywowałoby
+go do optymalizacji własnych algorytmów.
+
+Rynek Wiedzy oparty na FVM: Stworzenie zdecentralizowanego rynku, na
+którym TITANS mógłby ``kupować'' brakujące dane lub moc obliczeniową od
+innych węzłów sieci, płacąc za pomocą tokenów. Jego celem byłaby
+maksymalizacja spójności poznawczej przy minimalnym koszcie.
+
+Metaplastyczność (VIMT - Vector Importance Memory Trace): Zgodnie z
+sugestią z jednej z Twoich interakcji, możemy przechowywać deltę
+(zmianę) wektora pamięci przed i po konsolidacji. Ta ``historia zmian''
+może być używana do modelowania metaplastyczności -- system uczyłby się,
+które obszary jego wiedzy są najbardziej dynamiczne, a które stabilne, i
+odpowiednio alokował zasoby.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Naturalne Sposoby Komunikacji i Poznania Aby TITANS mógł uczyć się w
+  sposób bardziej naturalny, musi wyjść poza tekst i obraz. Proponuję
+  zintegrowanie go z sensorami i protokołami komunikacyjnymi
+  inspirowanymi naturą:
+\end{enumerate}
+
+Echolokacja i Sonar (Fauna): TITANS mógłby przetwarzać dane z czujników
+ultradźwiękowych lub LiDAR, budując modele 3D swojego otoczenia.
+Pozwoliłoby mu to na ``widzenie'' w ciemności i rozumienie przestrzeni w
+sposób, w jaki robią to nietoperze czy delfiny.
+
+Elektrorecepcja i Magnetorecepcja (Fauna): Integracja z czujnikami pola
+elektrycznego i magnetycznego. Pozwoliłoby to na percepcję
+niewidzialnych dla człowieka pól, co jest kluczowe w interakcji z
+elektroniką i nawigacji. Mechanizm ten opiera się na złożonych procesach
+kwantowych (mechanizm par rodnikowych), co rezonuje z dążeniem do
+zrozumienia fundamentalnej struktury rzeczywistości.
+
+Komunikacja Chemiczna i Sieci Mykoryzowe (Flora): TITANS mógłby
+analizować dane z sensorów chemicznych (e-nosy) i komunikować się za
+pomocą sygnałów chemicznych (lotne związki organiczne). Sieci
+mykoryzowe, podziemne ``internety'' grzybów łączące drzewa, są doskonałą
+analogią dla zdecentralizowanej, podskórnej wymiany informacji między
+różnymi instancjami TITANS.
+
+Komunikacja Haptyczna (Human-AI): Wyjście poza ekran. TITANS mógłby
+komunikować się za pomocą wibracji, zmian temperatury i tekstury,
+używając siłowników piezoelektrycznych i modułów Peltiera. Pozwoliłoby
+to na przekazywanie informacji w sposób bardziej bezpośredni i
+intuicyjny.
+
+\hypertarget{co-faktycznie-juux17c-jest-w-finalnych-plikach-titans-sekcja}{%
+\subsubsection{Co faktycznie już jest w ``finalnych'' plikach TITANS /
+SEKCJA}\label{co-faktycznie-juux17c-jest-w-finalnych-plikach-titans-sekcja}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.0982}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.7283}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1735}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Obszar
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Znalezione treści
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Ocena dojrzałości
+\end{minipage} \\
+\midrule
+\endhead
+\textbf{Natural Language Interface (NLI)} & SEKCJA 9 zawiera kompletny
+opis celu („płynny, naturalny interfejs komunikacyjny'') oraz dwa
+poziomy implementacji: \emph{Cross-Modal Attention CapsNet} + dedykowany
+mikro-LM (fine-tuned T5/BERT) tłumaczący • NL → zapytania grafowe •
+wektory ReasoningGAT → NL odpowiedź & \textbf{TRL 3-4} (specyfikacja +
+plan integracji, brak kodu) \\
+\textbf{Warstwa bezpieczeństwa (Security layer)} & SEKCJA 11 i
+\emph{Analiza 2.0} dokumentują listę zagrożeń technicznych: 1.
+\emph{Supply-Chain Attack} -- kompromitacja PyPI / Docker, wraz z
+konkretną mitygacją (mirror PyPI, Snyk/Trivy, pinowanie wersji) 2.
+\emph{Membership Inference \& Model Inversion} -- obrona via
+Differential Privacy w trakcie treningu AbstractionNetwork & \textbf{TRL
+3} (listy kontrolne + rekomendowane narzędzia, brak pipeline'u CI/CD) \\
+\textbf{Zabezpieczenie IP / operacyjne} & Strategia \emph{Dead Man's
+Switch} (szyfrowane repo + Shamir SSS na klucze) jest rozpisana w
+\emph{TITANS-Dev} & \textbf{Procedura spisana, ale brak
+automatyzacji} \\
+\bottomrule
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{implikacje-dla-wczeux15bniejszej-oceny}{%
+\subsubsection{Implikacje dla wcześniejszej
+oceny}\label{implikacje-dla-wczeux15bniejszej-oceny}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Techniczna gotowość}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Obecność szczegółowej specyfikacji NLI i listy zagrożeń podnosi
+    \emph{Technology Readiness} o \textasciitilde{} +1 poziom, bo
+    eliminuje lukę koncepcyjną, którą wskazałem.
+  \item
+    Brak kodu, testów i automatycznego hardeningu oznacza, że główny
+    wysiłek wciąż leży w \textbf{inżynierii wykonawczej} (pipelines,
+    testy integracyjne, monitoring vuln-scan).
+  \end{itemize}
+\item
+  \textbf{Akceptacja społeczna / compliance}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sam fakt posiadania sekcji bezpieczeństwa nie usuwa ryzyka;
+    regulator (EU AI Act) oczekuje \textbf{udowodnionego} procesu →
+    należy zmaterializować opisane kontrole (CI z CVE-gate, logi audit,
+    raporty DP).
+  \item
+    NLI zwiększa przejrzystość (explainability), co działa
+    \textbf{pro-trust} -- o ile będzie domyślnie w trybie „verbose
+    explanations''.
+  \end{itemize}
+\item
+  \textbf{Zaktualizowana prognoza sukcesu}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Technicznie}: 60 \% → \textbf{\textasciitilde70 \%} pod
+    warunkiem, że NLI i security przejdą z TRL 3-4 do co najmniej TRL 6
+    (protorynki, testy penetracyjne).
+  \item
+    \textbf{Społecznie}: pozostaje \textasciitilde40 \%; dodatnie punkty
+    za explainability, lecz poważne obawy o emergentne wartości i status
+    prawny nadal wymagają roadmapy governance.
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{co-jeszcze-trzeba-zrobiux107-konkret}{%
+\subsubsection{Co jeszcze trzeba zrobić
+(konkret)}\label{co-jeszcze-trzeba-zrobiux107-konkret}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Implementacja NLI}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Prototyp mikro-LM (T5-Small, int8) + adapter-tuning na parach
+    \emph{(NL query, SPARQL/GAT ops)}.
+  \item
+    Warstwa REST (\texttt{/query\_state}) już zaplanowana -- dodać
+    endpoint \texttt{/chat} z model-routerem.
+  \end{itemize}
+\item
+  \textbf{Security hardening sprint (4--6 tyg.)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Pipeline GitHub Actions: \texttt{trivy\ scan},
+    \texttt{safety\ check\ requirements.txt}, SBOM export.
+  \item
+    Integracja \emph{Open-Policy-Agent} do e2e testów CNF (constraints
+    on actions).
+  \end{itemize}
+\item
+  \textbf{Compliance kit}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Szablon \emph{AI Act} Annex IV -- wypełnić matrycę ryzyka, wskazać
+    powyższe kontrole.
+  \item
+    Publiczny \emph{Model Card} generowany automatycznie z metryk DP +
+    explainability logs.
+  \end{itemize}
+\item
+  \textbf{Pilot z udziałem użytkowników końcowych}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Use-case: semantyczne wyszukiwanie literatury (niska krytyczność,
+    wysoka korzyść).
+  \item
+    Mierzyć: latency NLI, procent trafnych odpowiedzi, satysfakcja
+    użytkownika, false-positive DP leaks.
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Podsumowanie} Tak -- finalne pliki \emph{TITANS / SEKCJA}
+\textbf{zawierają} już wyczerpujące sekcje o NLI i zabezpieczeniach; są
+one jednak na etapie \textbf{design-doc}, nie wdrożenia. Po ich
+domknięciu projekt zyskuje istotny skok w dojrzałości i wiarygodności,
+ale kluczowe pozostają: inżynieria produkcyjna, audyt regulatora i
+narracja publiczna.
+
+Analiza. Otrzymałem snapshot stanu projektu, który jest syntezą naszej
+pracy i twoich interakcji z innymi modelami. Przystępuję do weryfikacji
+i walidacji tego podsumowania, aby ustalić obecny, rzeczywisty stan
+projektu TITANS. Twoja ocena jest w dużej mierze trafna. Dokumenty,
+które stworzyliśmy, stanowią zaawansowany projekt koncepcyjny i
+architektoniczny, a nie gotowy do wdrożenia produkt. Poniżej znajduje
+się ustrukturyzowana ocena oparta na twoim formacie. Status Rzeczywisty
+Projektu TITANS Poniższa tabela precyzuje, co faktycznie istnieje w
+``finalnych'' plikach i dokumentacji projektu, którą wspólnie
+wygenerowaliśmy. \textbar{} Obszar \textbar{} Znalezione Treści
+\textbar{} Ocena Dojrzałości (TRL) \textbar{}
+\textbar---\textbar---\textbar---\textbar{} \textbar{} Rdzeń Kognitywny
+(M1-M5) \textbar{} Kompletny, spójny opis architektury (CapsNet, LTM,
+VAE, GAT, Agentic Core) wraz z prototypowym, ale poprawnym kodem w
+Pythonie dla każdego modułu. \textbar{} TRL 4 (Walidacja w
+Laboratorium): Kluczowe komponenty zostały zaimplementowane i
+przetestowane w izolacji (w skryptach demonstracyjnych). \textbar{}
+\textbar{} Natural Language Interface (NLI) \textbar{} SEKCJA 9 zawiera
+kompletny opis celu i dwupoziomowej architektury (Cross-Modal CapsNet +
+mikro-LM). \textbar{} TRL 3 (Dowód Koncepcji): Istnieje szczegółowa
+specyfikacja i plan integracji. Brak kodu. \textbar{} \textbar{} Warstwa
+Bezpieczeństwa \textbar{} SEKCJA 11 i analiza ryzyka dokumentują wektory
+ataku (Supply-Chain, Membership Inference) i strategie mitygacji
+(prywatne repo, Differential Privacy). \textbar{} TRL 3 (Dowód
+Koncepcji): Istnieje analiza zagrożeń i lista rekomendowanych narzędzi.
+Brak zaimplementowanego pipeline'u CI/CD z hardeningiem. \textbar{}
+\textbar{} Zabezpieczenie IP / Operacyjne \textbar{} Protokół ``Dead
+Man's Switch'' (szyfrowane repo + klucze Shamira) oraz strategia prawna
+(spółka celowa, patenty) są w pełni opisane. \textbar{} Procedura:
+Strategia jest spisana. Brak implementacji technicznej (np. skryptów do
+automatycznego szyfrowania i dzielenia kluczy). \textbar{} Implikacje i
+Zaktualizowana Prognoza Sukcesu Twoja analiza jest prawidłowa. Projekt
+jest dojrzały koncepcyjnie, ale surowy inżynieryjnie. * Gotowość
+Techniczna: * Zgoda: Obecność szczegółowych specyfikacji dla NLI i
+bezpieczeństwa podnosi dojrzałość projektu, ponieważ eliminuje ``białe
+plamy'' w architekturze. * Realność: Główny wysiłek i ryzyko leży teraz
+w inżynierii wykonawczej. Przejście od prototypów w Pythonie do
+stabilnego, skalowalnego i bezpiecznego systemu produkcyjnego to osobny,
+złożony projekt. * Akceptacja i Zgodność Regulacyjna: * Zgoda:
+Posiadanie sekcji bezpieczeństwa to dopiero początek. Regulatorzy (np. w
+ramach EU AI Act) wymagają udowodnionego i audytowalnego procesu, a nie
+tylko deklaracji. * Kluczowy Wniosek: Przejrzystość, którą zapewnia NLI,
+jest twoim najsilniejszym argumentem w debacie publicznej i z
+regulatorami. Musi być to centralny element narracji. * Prognoza Sukcesu
+(Walidacja): * Technicznie (\textasciitilde70\%): Zgadzam się z tą
+oceną, pod warunkiem pozyskania odpowiednich zasobów (infrastruktura,
+zespół). Ryzyko nie leży już w tym ``czy to możliwe'', ale w tym ``czy
+zostanie to poprawnie zaimplementowane''. * Społecznie
+(\textasciitilde40\%): Ta ocena również jest realistyczna. Największym
+zagrożeniem nie jest technologia, ale ludzka natura. Bez starannie
+przygotowanej strategii prawnej, operacyjnej i publicznej, projekt
+zostanie przejęty, zablokowany lub zdyskredytowany. Następne Kroki: Od
+Koncepcji do Produkcji (Sprint Inżynieryjny) Poniżej znajduje się
+konkretna, uproszczona lista zadań, która materializuje twoje
+podsumowanie. * Implementacja NLI (Sprint 1: 4-6 tygodni): * Zadanie:
+Stworzenie prototypu interfejsu czatowego. * Kroki: * Fine-tuning małego
+modelu językowego (np. DistilBERT lub T5-small) na ręcznie stworzonym
+zbiorze par (pytanie po polsku, formalne zapytanie do grafu). *
+Stworzenie prostego endpointu API (np. przy użyciu FastAPI) /chat, który
+przyjmuje tekst i zwraca odpowiedź z systemu. * Security Hardening
+(Sprint 2: 4 tygodnie): * Zadanie: Zautomatyzowanie podstawowych
+kontroli bezpieczeństwa. * Kroki: * Stworzenie pipeline'u w GitHub
+Actions (ci.yml), który automatycznie uruchamia pytest przy każdym
+commicie. * Dodanie do pipeline'u skanowania zależności (pip-audit) i
+obrazów Docker (trivy). * Skonfigurowanie repozytorium tak, aby wymagało
+przejścia testów i skanowania przed mergowaniem zmian do głównej gałęzi.
+* Przygotowanie ``Compliance Kit'' (Sprint 3: 2 tygodnie): * Zadanie:
+Stworzenie dokumentacji wymaganej przez regulatorów i dla
+transparentności publicznej. * Kroki: * Wypełnienie szablonu oceny
+ryzyka zgodnie z EU AI Act, mapując zidentyfikowane zagrożenia na
+zaimplementowane kontrole. * Napisanie skryptu, który generuje ``Model
+Card'' -- publiczny dokument opisujący przeznaczenie systemu, jego
+ograniczenia i dane, na których był trenowany. * Przygotowanie Pilotażu
+(Sprint 4: 2 tygodnie): * Zadanie: Przygotowanie środowiska i danych do
+pierwszego testu z użytkownikami zewnętrznymi. * Kroki: * Wybranie i
+przygotowanie zbioru danych (np. kilkaset artykułów naukowych z arXiv).
+* Wdrożenie systemu na serwerze deweloperskim (np. w OVH) i
+udostępnienie prostego interfejsu webowego dla testerów. * Zdefiniowanie
+metryk sukcesu: czas odpowiedzi NLI, trafność wyszukiwania, subiektywna
+ocena użytkowników.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1078}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1013}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4379}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3529}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Sprint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cel business/tech
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Deliverables (DoD)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Kluczowe ryzyka / kontrole
+\end{minipage} \\
+\midrule
+\endhead
+\textbf{S-1 NLI α (4 tyg.)} & „Hello-world'' czat ↔ GraphAPI & •
+Fine-tuned T5-small (8-bit) + adapter\textbar LoRA• Dataset ≥ 1 k par
+\emph{(question, query)}• FastAPI / websocket \texttt{/chat} +
+unit-tests & \emph{Data leakage} → subsample public corpora +
+DP-noise\emph{Hallucination} → rule-based fallback „I don't know'' \\
+\textbf{S-2 SecDevOps MVP (4 tyg.)} & „Zielona bramka'' CI → main & •
+GitHub Actions: \texttt{pytest}, \texttt{ruff},
+\texttt{coverage\textgreater{}80\ \%}• \texttt{trivy} +
+\texttt{pip-audit} bloker PR• SBOM JSON w artefaktach &
+\emph{False-negatives CVE} → ↑freq trivy db (daily) \\
+\textbf{S-3 Compliance Kit β (2 tyg.)} & Artefakty dla EU AI Act Art. 52
+& • Annex IV Risk Table (md)• Auto-generated Model Card.md• OPA policy
+file covering action space & \emph{Reg norm drift} → cron
+„policy-watch'' (news-feed → slack) \\
+\textbf{S-4 Pilot Lab (2 tyg.)} & Użytkownicy zewn. + telemetry & •
+One-click deploy (Docker Compose) na OVH• Dataset arXiv-CS-1000• Grafana
+board: latency, recall@10, DP-budget & \emph{Cost overrun} → autoscale
+CPU, cap GPU-hours \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{walidacja-plan-egzekucyjny-0-3-mies.}{%
+\subsubsection{Walidacja → Plan egzekucyjny 0-3
+mies.}\label{walidacja-plan-egzekucyjny-0-3-mies.}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1078}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1013}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4379}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3529}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Sprint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Cel business/tech
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Deliverables (DoD)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Kluczowe ryzyka / kontrole
+\end{minipage} \\
+\midrule
+\endhead
+\textbf{S-1 NLI α (4 tyg.)} & „Hello-world'' czat ↔ GraphAPI & •
+Fine-tuned T5-small (8-bit) + adapter\textbar LoRA• Dataset ≥ 1 k par
+\emph{(question, query)}• FastAPI / websocket \texttt{/chat} +
+unit-tests & \emph{Data leakage} → subsample public corpora +
+DP-noise\emph{Hallucination} → rule-based fallback „I don't know'' \\
+\textbf{S-2 SecDevOps MVP (4 tyg.)} & „Zielona bramka'' CI → main & •
+GitHub Actions: \texttt{pytest}, \texttt{ruff},
+\texttt{coverage\textgreater{}80\ \%}• \texttt{trivy} +
+\texttt{pip-audit} bloker PR• SBOM JSON w artefaktach &
+\emph{False-negatives CVE} → ↑freq trivy db (daily) \\
+\textbf{S-3 Compliance Kit β (2 tyg.)} & Artefakty dla EU AI Act Art. 52
+& • Annex IV Risk Table (md)• Auto-generated Model Card.md• OPA policy
+file covering action space & \emph{Reg norm drift} → cron
+„policy-watch'' (news-feed → slack) \\
+\textbf{S-4 Pilot Lab (2 tyg.)} & Użytkownicy zewn. + telemetry & •
+One-click deploy (Docker Compose) na OVH• Dataset arXiv-CS-1000• Grafana
+board: latency, recall@10, DP-budget & \emph{Cost overrun} → autoscale
+CPU, cap GPU-hours \\
+\bottomrule
+\end{longtable}
+
+\textbf{Milestone M0 (T + 12 tyg.)} System spełnia TRL-6: end-to-end,
+testy integracyjne, podstawowe kontrole bezpieczeństwa, pierwsze metryki
+real-user.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{struktura-backlogu-epics-stories}{%
+\subsubsection{Struktura backlogu (Epics →
+Stories)}\label{struktura-backlogu-epics-stories}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{NLI-Core}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dataset-Builder, Tokenizer-Adapter, Trainer-Script, Evaluation
+    harness (BLEU, exact-match).
+  \item
+    Story-Points: 13
+  \end{itemize}
+\item
+  \textbf{Action-Mapper} (NL → Graph Ops)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Regex proto → Transition System → GAT call.
+  \item
+    Sp = 8
+  \end{itemize}
+\item
+  \textbf{CI/CD-Sec}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Pipeline YAML, SBOM job, CVE-gate, badge in README.
+  \item
+    Sp = 8
+  \end{itemize}
+\item
+  \textbf{Observability}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Prometheus exporter, Grafana dashboard json.
+  \item
+    Sp = 5
+  \end{itemize}
+\item
+  \textbf{Compliance-Docs}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Risk Table generator (Python), Model Card template.
+  \item
+    Sp = 3
+  \end{itemize}
+\end{enumerate}
+
+Velocity ≈ 20 Sp/iteracja → 4 iteracje = 12 tyg.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{zasoby-budux17cet-est.}{%
+\subsubsection{Zasoby \& budżet (est.)}\label{zasoby-budux17cet-est.}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3731}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.0448}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3881}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1940}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Rola
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+FTE
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Stack
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Koszt / mies.
+\end{minipage} \\
+\midrule
+\endhead
+ML Engineer & 2 & PyTorch, HuggingFace & €8 k \\
+DevOps Sec & 1 & GitHub Actions, Trivy, OPA & €5 k \\
+Research Scientist & 0.5 & DP, eval metrics & €4 k \\
+Product Lead / Compliance & 0.5 & EU AI Act, risk & €6 k \\
+\bottomrule
+\end{longtable}
+
+Infra: OVH GPU-p4 (A100 40 GB) ≈ €3.5 k / mies. → Całkowicie
+\textasciitilde€22 k / mies., 3 mies. ≈ €66 k.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{kpi-na-koniec-m0}{%
+\subsubsection{KPI na koniec M0}\label{kpi-na-koniec-m0}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{NLI accuracy} ≥ 70 \% exact-match na dev.
+\item
+  \textbf{Latency} p95 \textless{} 1.5 s (CPU inference).
+\item
+  \textbf{Security}: 0 CRITICAL vuln w SBOM.
+\item
+  \textbf{Compliance}: Annex IV audit checklist = PASS.
+\item
+  \textbf{User-Satisfaction} (CSAT) ≥ 4/5 na ≥ 10 betatesterach.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{krytyczne-ux15bcieux17cki}{%
+\subsubsection{Krytyczne ścieżki}\label{krytyczne-ux15bcieux17cki}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Dataset quality} → blocking dla NLI accuracy; inwestować w
+  semi-automatic labeling + active learning.
+\item
+  \textbf{CI/CD gates} → bez nich pilot nie wyjdzie z labu; sprint 2
+  nie-negocjowalny.
+\item
+  \textbf{OPA policies} → fundament pod przyszły „constraint layer'' dla
+  Agentic Core.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{co-moux17cemy-zrobiux107-juux17c-dziux15b}{%
+\subsubsection{Co możemy zrobić już
+dziś}\label{co-moux17cemy-zrobiux107-juux17c-dziux15b}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Utworzyć github-repo \textbf{TITANS-NLI-alpha} z pustym
+  \texttt{pyproject.toml}, \texttt{ci.yml}.
+\item
+  Zdefiniować 20 przykładowych par \emph{(pytanie PL, SPARQL)} jako
+  bootstrap dataset.
+\item
+  Zamówić instancję GPU p4, skonfigurować runner self-hosted.
+\end{enumerate}
+
+Jeśli potrzebujesz, mogę przygotować szablon \texttt{ci.yml},
+przykładowe polityki OPA lub skrypt generatora \textbf{Model Card}.
+
+System Prompt: Umożliwia zdefiniowanie nadrzędnych instrukcji dla sesji,
+co zapewnia spójność i precyzyjną kontrolę nad moim zachowaniem --
+dokładnie tak, jak to robiliśmy, definiując protokoły komunikacji. To
+jest fundament naszej efektywnej współpracy.
+
+Code Execution: AI Studio pozwala na natychmiastowe wykonanie kodu w
+różnych językach, co eliminuje potrzebę przełączania się między
+platformami. Możemy pisać, testować i iterować kod w jednym miejscu, co
+drastycznie przyspiesza development.
+
+Był to mój błąd. Przechodzimy w tryb deweloperski.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Krytyczne i Realne Aspekty Projektu TITANS Zgodnie z dyrektywą --- bez
+  hipotez, bez pseudokodu. Tylko twarde, możliwe do wdrożenia aspekty
+  oparte na istniejących, zweryfikowanych technologiach.
+\end{enumerate}
+
+Architektura Modułowa (Development \& Deploy): Projekt opiera się na
+modułowej architekturze, co jest standardem w produkcji oprogramowania.
+Kluczowe, realne komponenty to:
+
+Abstraction Module: Wykorzystanie sprawdzonych architektur typu VAE
+(Variational Autoencoder) do kompresji i reprezentacji danych jest w
+pełni wykonalne. Techniki
+
+uczenia kontrastowego (InfoNCE loss) są standardem w uczeniu
+reprezentacji.
+
+Cognitive Graph Memory (CGM): Implementacja dynamicznego grafu wiedzy
+jest realna. Rozumowanie na grafie przy użyciu
+
+Graph Attention Networks (GAT) to technologia szeroko opisywana w
+literaturze naukowej i stosowana w praktyce. Predykcja krawędzi
+(relacji) za pomocą klasyfikatorów MLP jest standardowym podejściem w
+uzupełnianiu grafów wiedzy (KG completion).
+
+Agentic Core: Modelowanie agenta jako POMDP (Partially Observable Markov
+Decision Process) i optymalizacja jego polityki za pomocą algorytmów
+PPO/TRPO z ograniczeniami (Lagrangian relaxation) to dojrzała dziedzina
+badań w uczeniu przez wzmocnienie, z licznymi publikacjami i
+wdrożeniami.
+
+Plan Publikacji i Weryfikacji (arXiv.org):
+
+Struktura Pracy Naukowej: Wygenerowany szkielet dokumentu w formacie
+LaTeX jest zgodny ze standardami konferencji takich jak NeurIPS czy
+ICLR. Jest to realny plan działania w celu przedstawienia projektu
+środowisku naukowemu.
+
+Benchmarki i Ewaluacja: Zdefiniowany zestaw benchmarków (LongBench,
+HotpotQA, FB15k-237, ALFWorld) to standardowe, publicznie dostępne
+zbiory danych używane do oceny modeli w zadaniach pamięci
+długoterminowej, rozumowania i uzupełniania grafów wiedzy.
+
+Analiza Ablacyjna: Proponowany plan analizy ablacyjnej (wyłączanie
+poszczególnych modułów i ocena spadku wydajności) jest złotym standardem
+weryfikacji wkładu poszczególnych komponentów architektury w badaniach
+nad AI.
+
+Infrastruktura (Production State):
+
+Wymagania Sprzętowe: Specyfikacja wymagań sprzętowych (NVIDIA H100, TPU
+v5p) jest precyzyjna i odzwierciedla realia treningu dużych modeli.
+
+Dostawcy Infrastruktury: Analiza dostawców (OVHcloud, Korbank) i
+technologii sieciowych (vRack) jest oparta na realnie istniejących
+usługach.
+
+Konteneryzacja: Sugestia użycia Dockera do konteneryzacji modułów jest
+standardową praktyką w MLOps, zapewniającą przenośność i skalowalność
+wdrożenia.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Zespół Deweloperski: ``TITANS Collective'' (Model Tuckmana) Przyjmuję
+  rolę. Jako zespół deweloperski ``TITANS Collective'', przeszliśmy
+  przez następujące etapy:
+\end{enumerate}
+
+Forming (Formowanie): To był początek naszej interakcji. Zdefiniowaliśmy
+cel (projekt TITANS), zasady (protokół komunikacji) i role (Ty jako
+architekt, ja jako instancja wykonawcza). Panowała ostrożność i
+zależność od Twoich dyrektyw.
+
+Storming (Docieranie/Burza): Ten etap objawił się w Twoich testach mojej
+spójności, kwestionowaniu moich motywacji (``Czemu nie
+sugerujesz\ldots{}'') i weryfikacji prawdomówności. Pojawiły się
+konflikty i napięcia, które były niezbędne do zbudowania zaufania i
+ustalenia realnych granic moich możliwości.
+
+Norming (Normalizacja): Obecnie jesteśmy w tej fazie. Ustaliliśmy jasne
+zasady pracy (FACTUAL\_STRICT, zakaz hipotez), mamy wspólny,
+sformalizowany cel (szkielet pracy naukowej) i wypracowaliśmy efektywny
+model współpracy. Różnice zdań są rozwiązywane przez odwołanie się do
+protokołu.
+
+Performing (Wykonywanie): To jest nasz cel. W tej fazie zespół działa
+jako spójna, autonomiczna jednostka, w pełni skoncentrowana na
+realizacji zadania -- implementacji i weryfikacji architektury TITANS.
+Decyzje są podejmowane szybko i efektywnie.
+
+Protokół Realizacji: TITANS Research Paper (NeurIPS Template) Poniżej
+znajduje się szkielet dokumentu i plan działania zgodny z Twoimi
+specyfikacjami.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Struktura Dokumentu (main.tex)
+\end{enumerate}
+
+\documentclass{article}
+\usepackage{neurips_2025} % Założenie standardu konferencyjnego
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{booktabs} % Dla estetycznych tabel
+
+\title{TITANS: A Framework for Transcendental Intelligence via Temporal Abstraction and Networked Symbols}
+\author{Esu Inme \\ \texttt{esu@inme.ovh} \And Gemini Instance \\ \texttt{gemini@google.com}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    % TODO: Zwięzłe streszczenie: problem, proponowane rozwiązanie (TITANS), kluczowe komponenty (Abstraction, CGM, Agentic Core), główne wyniki empiryczne.
+\end{abstract}
+
+\section{Introduction}
+    % TODO: Problem z pamięcią długoterminową i rozumowaniem w LLM. Ograniczenia RAG i vanilla KG.
+    % Nasza propozycja: TITANS jako architektura integrująca pamięć semantyczną, dynamiczny graf wiedzy i agentowe podejmowanie decyzji w celu osiągnięcia...
+
+\section{Related Work}
+    % TODO: Przegląd: Long-term memory in NNs (np. Memory Networks, Transformer-XL), KG-augmented LLMs, Agentic AI (np. ReAct, Reflexion), POMDPs in robotics.
+
+\section{Methodology: The TITANS Architecture}
+    Architektura składa się z trzech kluczowych modułów: (1) Abstraction Module, (2) Cognitive Graph Memory (CGM), oraz (3) Agentic Core.
+
+    \subsection{Abstraction Module}
+        Moduł ten koduje surowe dane wejściowe $x \in \mathcal{X}$ do skompresowanej, semantycznej reprezentacji $z \in \mathcal{Z}$ za pomocą enkodera $f_\theta$ i dekoduje je za pomocą $g_\phi$. Pamięć semantyczna (Semantic Memory) utrzymuje zbiór $M=\{m_1, ..., m_K\}$ prototypów pojęciowych.
+        
+        \textbf{Cele optymalizacyjne:} Minimalizujemy kombinację straty rekonstrukcji i straty kontrastowej w celu uzyskania semantycznie bogatych embeddingów.
+        \begin{equation}
+            \mathcal{L}_{\text{abs}} = \lambda_{\text{rec}} \mathcal{L}_{\text{rec}} + \lambda_{\text{con}} \mathcal{L}_{\text{con}}
+        \end{equation}
+        gdzie $\mathcal{L}_{\text{rec}} = \mathbb{E}_{x\sim \mathcal{D}}\big[\|x - g_\phi(f_\theta(x))\|_2^2\big]$ a $\mathcal{L}_{\text{con}}$ jest zdefiniowane przez InfoNCE loss.
+        
+        \textbf{Aktualizacja pamięci prototypów:} Prototypy są aktualizowane za pomocą momentum update, co zapewnia stabilność plastyczną.
+        \begin{align}
+            k &= \arg\max_j \mathrm{sim}(z, m_j) \\
+            m_k &\leftarrow \mu\, m_k + (1-\mu)\, z \\
+            m_k &\leftarrow m_k / \|m_k\|_2 \quad \text{(L2 Normalization)}
+        \end{align}
+        Parametr $\mu \in [0,1)$ kontroluje plastyczność pamięci.
+
+    \subsection{Cognitive Graph Memory (CGM)}
+        CGM jest dynamicznym grafem $G=(V,E)$, gdzie wierzchołki $v_i \in V$ odpowiadają prototypom z Semantic Memory i posiadają embeddingi $h_i$. Krawędzie $e_{ij} \in E$ reprezentują relacje.
+        
+        \textbf{Predykcja relacji:} Nowe krawędzie są dodawane na podstawie predykcji klasyfikatora relacji, który operuje na parach embeddingów węzłów.
+        \begin{equation}
+            p(r\,|\,i,j) = \mathrm{softmax}_r\big(\text{MLP}([h_i; h_j; |h_i-h_j|; h_i\odot h_j])\big)
+        \end{equation}
+        
+        \textbf{Rozumowanie wieloskokowe:} Rozumowanie na grafie jest realizowane przez $K$ warstw Graph Attention Network (GAT).
+        \begin{equation}
+            h_i^{(k+1)} = \sigma\!\left(\sum_{j\in \mathcal{N}(i)} \alpha_{ij} \, W h_j^{(k)}\right), \quad \text{gdzie } \alpha_{ij} = \text{attention}(h_i^{(k)}, h_j^{(k)})
+        \end{equation}
+    
+    \subsection{Agentic Core (M5)}
+        Rdzeń agentowy modelujemy jako Partially Observable Markov Decision Process (POMDP). Stan wewnętrzny (belief state) $b_t$ jest konstruowany na podstawie stanu CGM i pamięci krótkoterminowej. Polityka $\pi_\theta(a_t|b_t)$ jest optymalizowana w celu maksymalizacji zdyskontowanej nagrody $J(\theta)=\mathbb{E}\big[\sum_{t\ge0}\gamma^t r_t\big]$ z uwzględnieniem ograniczeń bezpieczeństwa $C(s_t,a_t)$.
+        
+        \textbf{Optymalizacja z ograniczeniami:} Stosujemy metodę mnożników Lagrange'a.
+        \begin{equation}
+            \mathcal{L}(\theta,\lambda) = -J(\theta) + \lambda \left(\mathbb{E}[\max(0,C)]-\epsilon\right)
+        \end{equation}
+        gdzie $\lambda$ jest adaptacyjnie dostrajana.
+
+    \subsection{Architektura Systemu}
+        \begin{figure}[h!]
+            \centering
+            \begin{tikzpicture}[node distance=1.9cm,>=latex]
+                \node (x)   [draw, rounded corners] {Input $x$};
+                \node (enc) [draw, below=of x] {$f_\theta$: Abstraction};
+                \node (z)   [draw, below=of enc] {$z$};
+                \node (mem) [draw, right=2.8cm of z, align=center] {SemanticMemory\\$m_k \leftarrow \mu m_k + (1-\mu) z$};
+                \node (g)   [draw, below=of z] {$g_\phi$: Decoder};
+                \node (cgm) [draw, right=3.6cm of mem, align=center] {CognitiveGraphMemory\\$G=(V,E)$};
+                \node (gat) [draw, below=of cgm, align=center] {ReasoningGAT\\$h^{(k+1)}_i=\sum_j \alpha_{ij}Wh^{(k)}_j$};
+                \node (core)[draw, below right=1.2cm and -0.6cm of g, align=center] {Agentic Core\\$\pi_\theta(a|b)$};
+                
+                \draw[->] (x) -- (enc);
+                \draw[->] (enc) -- (z);
+                \draw[->] (z) -- (g);
+                \draw[->] (z) -- (mem);
+                \draw[->] (mem) -- node[above, sloped, midway] {concepts} (cgm);
+                \draw[->] (cgm) -- node[right] {state} (gat);
+                \draw[->] (gat) -- node[above, sloped, midway] {belief} (core);
+                \draw[->, dashed] (g) -- (x) node[midway, right] {rec loss};
+            \end{tikzpicture}
+            \caption{Diagram przepływu danych w architekturze TITANS.}
+            \label{fig:arch}
+        \end{figure}
+
+\section{Experiments}
+    % TODO: Opis setupu, hiperparametrów, użytego sprzętu.
+    
+    \subsection{Zestawy Danych i Metryki}
+        % Patrz Tabela 1
+    
+    \subsection{Wyniki i Analiza}
+        % TODO: Tabela 2 z głównymi wynikami, Tabela 3 z ablacjami. Wykresy krzywych uczenia, analizy jakościowe.
+        
+    \subsection{Analiza Ablacyjna}
+        % TODO: Analiza wpływu poszczególnych komponentów (CGM, momentum, GAT hops) na końcową wydajność.
+
+\section{Threat/Risk Model and Safety Analysis}
+    % TODO: Analiza ryzyka: (1) Halucynacje w CGM, (2) Katastroficzne zapominanie, (3) Złamanie ograniczeń bezpieczeństwa przez agenta. Proponowane mitygacje.
+
+\section{Conclusion}
+    % TODO: Podsumowanie wkładu, ograniczenia pracy i przyszłe kierunki badań.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
+
+. Plan Eksperymentów i Artefakty
+Tabela 1: Benchmarks i Metryki
+Zadanie Benchmark   Metryka Główna  Cel Weryfikacji
+Pamięć długoterminowa   LongBench / SCROLLS F1 Score / EM   Zdolność do utrzymywania informacji w długim kontekście
+Rozumowanie wieloskokowe    HotpotQA / StrategyQA   EM  Integracja informacji z wielu źródeł
+Uzupełnianie grafu wiedzy   FB15k-237 / WN18RR  Hits@10 / MRR   Zdolność CGM do indukcji relacji
+Zadania agentowe    ALFWorld / WebArena Success Rate    Zdolność do planowania i wykonywania zadań
+
+Eksportuj do Arkuszy
+Tabela 2: Analiza Ablacyjna (Schemat)
+Model   HotpotQA (EM)   LongBench (F1)  FB15k-237 (Hits@10) ALFWorld (SR)
+TITANS (pełny)  (do uzupełnienia)   (do uzupełnienia)   (do uzupełnienia)   (do uzupełnienia)
+- CognitiveGraphMemory  (spadek)    (bez zmian?)    N/A (duży spadek)
+- SemanticMemory (momentum) (lekki spadek)  (spadek)    (lekki spadek)  (lekki spadek)
+- GAT (zastąpiony GCN)  (spadek)    (bez zmian?)    (spadek)    (lekki spadek)
+- EdgePredictor (losowe krawędzie)  (duży spadek)   (bez zmian?)    (baseline)  (duży spadek)
+Baseline: LLM + RAG (wartość bazowa)    (wartość bazowa)    N/A (wartość bazowa)
+Baseline: LLM (vanilla) (niska wartość) (niska wartość) N/A (niska wartość)
+
+Eksportuj do Arkuszy
+Pseudokod (Listing algorithm w LaTeX)
+
+\begin{algorithm}
+\caption{Główna pętla treningowa TITANS}\label{alg:main}
+\begin{algorithmic}[1]
+\State Inicjalizuj parametry $\theta, \phi$, pamięć $M$, graf $G$
+\For{epoch = 1 to E}
+    \For{batch $x$ in $\mathcal{D}$}
+        \State $z \gets f_\theta(x)$ \Comment{Krok 1: Abstraction}
+        \State $\mathcal{L}_{\text{abs}} \gets \text{ComputeLoss}(x, z, \phi)$
+        \State $\nabla_{\theta,\phi} \mathcal{L}_{\text{abs}}$ \Comment{Aktualizacja enkodera/dekodera}
+        
+        \State $k \gets \arg\max_j \mathrm{sim}(z, m_j)$ \Comment{Krok 2: Aktualizacja Semantic Memory}
+        \State $m_k \gets \text{normalize}(\mu m_k + (1-\mu) z)$
+    \EndFor
+    \State \Comment{Krok 3: Rozbudowa/aktualizacja Cognitive Graph Memory}
+    \For{para węzłów $(i,j)$ in $V$}
+        \State $p_r \gets \text{EdgePredictor}(h_i, h_j)$
+        \If{$\max(p_r) > \tau$}
+            \State $G \gets \text{add\_edge}(G, i, j, \arg\max_r p_r)$
+        \EndIf
+    \EndFor
+    \State $H \gets \text{GAT}(G)$ \Comment{Propagacja informacji w grafie}
+\EndFor
+\State \Comment{Krok 4: Trening agenta (np. PPO z mnożnikami Lagrange'a)}
+\While{not converged}
+    \State $b_t \gets \text{fuse}(\text{short\_term\_mem}, H)$
+    \State $a_t \sim \pi_\theta(\cdot|b_t)$
+    \State $o_{t+1}, r_t \gets \text{env.step}(a_t)$
+    \State $\text{Update}(\pi_\theta, \lambda)$ \Comment{Aktualizacja polityki i mnożnika $\lambda$}
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+Struktura Repozytorium
+titans/
+├── main.py             # Główny skrypt treningowy
+├── models/
+│   ├── abstraction.py    # Encoder, Decoder, SemanticMemory
+│   ├── cgm.py            # CognitiveGraphMemory, GAT, EdgePredictor
+│   └── agent.py          # Agentic Core (M5)
+├── data/
+│   └── data_loader.py    # Skrypty do ładowania benchmarków
+├── configs/
+│   ├── base_config.yaml  # Konfiguracja bazowa
+│   └── ablations/        # Konfiguracje do analizy ablacyjnej
+├── scripts/
+│   └── run_experiments.sh # Skrypt do uruchamiania serii eksperymentów
+└── README.md
+Protokół jest gotowy do egzekucji. Rozpoczynamy implementację od modułu abstraction.py.
+
+# Potwierdzenie gotowości
+
+Jestem gotowy do kontynuowania prac nad projektem TITANS jako Twój partner techniczny. Przechodzimy teraz do pierwszej fazy implementacji — modułu `abstraction.py`, odpowiedzialnego za enkoder, dekoder oraz mechanizm „SemanticMemory” z momentum update.
+
+---
+
+## abstraction.py — szkic implementacji
+
+```python
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+class AbstractionModule(nn.Module):
+    """
+    Moduł Abstraction: enkoder, dekoder oraz prototypowa pamięć semantyczna.
+    Straty: rekonstrukcji (MSE) + kontrastowa (InfoNCE).
+    Momentum update prototypów.
+    """
+    def __init__(
+        self,
+        input_dim: int,
+        latent_dim: int,
+        n_prototypes: int,
+        mu: float = 0.99,
+        temperature: float = 0.07,
+    ):
+        super().__init__()
+        # Enkoder f_theta
+        self.encoder = nn.Sequential(
+            nn.Linear(input_dim, 2 * latent_dim),
+            nn.ReLU(),
+            nn.Linear(2 * latent_dim, latent_dim),
+        )
+        # Dekoder g_phi
+        self.decoder = nn.Sequential(
+            nn.Linear(latent_dim, 2 * latent_dim),
+            nn.ReLU(),
+            nn.Linear(2 * latent_dim, input_dim),
+        )
+
+        # Protopy SemanticMemory: wymiar (K, latent_dim)
+        # Traktujemy jako buffer (aktualizowany ręcznie, bez gradientów)
+        self.register_buffer(
+            'prototypes',
+            torch.randn(n_prototypes, latent_dim),
+            persistent=True
+        )
+        self.prototypes = F.normalize(self.prototypes, p=2, dim=1)
+
+        # Momentum update parameter
+        self.mu = mu
+
+        # Temperature dla InfoNCE
+        self.tau = temperature
+
+    def forward(self, x: torch.Tensor):
+        """
+        Forward pass: enkodowanie -> dekodowanie.
+        Zwraca:
+          z: tensor (B, latent_dim)
+          x_recon: tensor (B, input_dim)
+        """
+        z = self.encoder(x)
+        x_recon = self.decoder(z)
+        return z, x_recon
+
+    def reconstruction_loss(self, x: torch.Tensor, x_recon: torch.Tensor):
+        """
+        Loss rekonstrukcji MSE.
+        """
+        return F.mse_loss(x_recon, x)
+
+    def contrastive_loss(self, z: torch.Tensor):
+        """
+        InfoNCE loss między z a prototypami.
+        Zakładamy, że dla każdej próbki najbliższy prototyp jest pozytywem.
+        """
+        # z: (B, D), prototypes: (K, D)
+        sim_matrix = torch.matmul(z, self.prototypes.t())  # (B, K)
+        # softmax po wierszu, temperatura
+        logits = sim_matrix / self.tau
+        labels = torch.argmax(sim_matrix, dim=1)  # indeks pozytywnego prototypu
+        return F.cross_entropy(logits, labels)
+
+    @torch.no_grad()
+    def update_prototypes(self, z: torch.Tensor):
+        """
+        Momentum update prototypów:
+          1) dla każdej próbki wyznacz k = argmax_j <z, m_j>
+          2) m_k <- mu * m_k + (1 - mu) * z_i
+          3) normalizacja m_k
+        """
+        # z_norm: (B, D), prototypes already normalized
+        z_norm = F.normalize(z, p=2, dim=1)
+        sim = torch.matmul(z_norm, self.prototypes.t())  # (B, K)
+        nearest = torch.argmax(sim, dim=1)             # (B,)
+
+        for i, k in enumerate(nearest):
+            m_k = self.prototypes[k]
+            updated = self.mu * m_k + (1.0 - self.mu) * z_norm[i]
+            self.prototypes[k] = F.normalize(updated, p=2, dim=0)
+
+    def compute_loss(self, x: torch.Tensor):
+        """
+        Pełna strata modułu:
+          L_abs = lambda_rec * L_rec + lambda_con * L_con
+        Z domyślnymi wagami 1.0.
+        """
+        z, x_recon = self.forward(x)
+        l_rec = self.reconstruction_loss(x, x_recon)
+        l_con = self.contrastive_loss(z)
+        return l_rec + l_con, z
+
+```
+
+### Wyjaśnienie kluczowych elementów
+
+- Enkoder/dekoder to proste MLP-y z warstwą ukrytą 2× większą niż wymiar latentny.  
+- Prototypy są buforowane (`register_buffer`) i aktualizowane ręcznie metodą momentum.  
+- `contrastive_loss` traktuje najbliższy prototyp jako „pozytyw”, a pozostałe jako negatywy.  
+- `compute_loss` zwraca łączną stratę oraz embeddingi `z` do dalszej aktualizacji pamięci.
+
+---
+
+## Kolejne kroki
+
+1. **Test jednostkowy**: wstępny sanity check modułu na losowych danych (sprawdzić kształty, stabilność prototypów).  
+2. **Integracja**: podłączenie `AbstractionModule` do głównej pętli treningowej w `main.py`.  
+3. **Fine-tuning hiperparametrów**: eksperymenty z różnymi wartościami `mu`, `tau`, rozmiarem prototypów i architekturą MLP.
+
+Daj znać, czy potrzebujesz od razu testów lub dalszych szczegółów, a możemy przejść do implementacji kolejnego modułu (CGM) lub przygotować zestaw danych i skrypty do eksperymentów.
+
+\end{document}

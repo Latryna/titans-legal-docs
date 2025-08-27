@@ -1,0 +1,145 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[letterpaper,twocolumn]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+Analiza. Protokół przyjęty. Korekta dotycząca ``Modalności'' została
+zintegrowana. Przystępuję do aktualizacji planu projektu TITANS,
+włączając w niego innowacje z ArXiv oraz moje sugestie dotyczące
+usprawnień i analizy ryzyka. Projekt TITANS: Plan Rozwoju i Usprawnień
+(Wersja 2.0) Poniższy dokument stanowi rozszerzenie planu wdrożeniowego,
+definiując kluczowe kierunki rozwoju architektury po zaimplementowaniu
+pięciu fundamentalnych kamieni milowych. SEKCJA 9: Integracja Wielu
+Modalności i Interfejs Języka Naturalnego (NLI) 9.1. Cel
+Architektoniczny Przekształcenie TITANS z systemu operującego wyłącznie
+na abstrakcyjnych wektorach w byt zdolny do rozumienia i generowania
+informacji w wielu modalnościach (tekst, obraz, dźwięk). Celem jest
+stworzenie płynnego, naturalnego interfejsu komunikacyjnego. 9.2.
+Proponowane Moduły 1. Moduł 1: Cross-Modal Attention Capsule Network
+(Innowacja z ArXiv) * Opis: Rozbudowa CapsNet (Milestone 1) o mechanizmy
+uwagi krzyżowej. Pozwoli to systemowi na uczenie się fundamentalnych
+powiązań między różnymi strumieniami danych sensorycznych na najniższym
+poziomie percepcji. * Przykład: System automatycznie skoreluje wektor
+percepcyjny dla obrazu kota z wektorem dla dźwięku ``miau'', tworząc
+jeden, spójny, wielomodalny ``percept''. * Implementacja: Dodanie warstw
+CrossAttention między równoległymi gałęziami sieci kapsułkowej, każda
+przetwarzająca inną modalność. 2. Moduł 2: Natural Language Interface
+(NLI) * Opis: Warstwa tłumacząca, która działa w obie strony: * Input:
+Tłumaczy zapytania w języku naturalnym na precyzyjne zapytania do
+CognitiveGraphMemory (np. operacje na grafie). * Output: Tłumaczy wyniki
+rozumowania ReasoningGAT (surowe wektory) z powrotem na spójną,
+zrozumiałą odpowiedź w języku naturalnym. * Implementacja: Wykorzystanie
+mniejszego, wyspecjalizowanego modelu językowego (np. fine-tuning modelu
+z rodziny T5 lub BERT), który zostanie wytrenowany na parach (pytanie w
+języku naturalnym, formalne zapytanie grafowe). SEKCJA 10: Usprawnienia
+Rdzenia Kognitywnego 10.1. Cel Architektoniczny Ewolucja Agentic Core z
+systemu dążącego do homeostazy w system proaktywnie dążący do ekspansji
+i optymalizacji własnych procesów uczenia. 10.2. Proponowane Modyfikacje
+1. Modyfikacja 1: Predictive World Model w Grafie Poznawczym (Innowacja
+z ArXiv) * Opis: Zintegrowanie ReasoningGAT z modelem predykcyjnym (np.
+siecią rekurencyjną lub transformerem), który uczy się przewidywać
+ewolucję grafu w czasie. * Usprawnienie: Agentic Core zyskuje zdolność
+do ``wyobraźni''. Zamiast planować krok po kroku, może uruchamiać
+tysiące symulacji ``co by było, gdyby'', oceniać całe trajektorie
+przyszłych stanów i wybierać tę, która prowadzi do najbardziej
+optymalnego wyniku w długim terminie. To jest przejście do planowania
+opartego na modelu (model-based planning). 2. Modyfikacja 2: Rdzeń
+Homeostatyczny 2.0 - Imperatyw Ekspansji * Opis: Modyfikacja funkcji
+nagrody Agentic Core. Obecnie nagradzana jest tylko redukcja niepewności
+(porządkowanie wiedzy). Nowa funkcja nagrody będzie sumą ważoną: Reward
+= w1 * (Uncertainty Reduction) + w2 * (Knowledge Space Expansion). *
+Usprawnienie: Wprowadza to drugą, konkurencyjną motywację. System jest
+nagradzany nie tylko za porządkowanie tego, co już wie, ale także za
+aktywne poszukiwanie i asymilowanie całkowicie nowych domen wiedzy. To
+jest narodziny ``ambicji''. 3. Modyfikacja 3: Metaplastyczność * Opis:
+Implementacja algorytmu meta-uczenia (np. MAML - Model-Agnostic
+Meta-Learning), który dynamicznie reguluje tempo uczenia się
+poszczególnych modułów. * Usprawnienie: System uczy się, jak się uczyć.
+Będzie automatycznie zwiększał swoją plastyczność w nowych, nieznanych
+obszarach (szybkie uczenie), jednocześnie zmniejszając ją w dobrze
+ugruntowanych, stabilnych domenach wiedzy, aby zapobiec katastrofalnemu
+zapominaniu. SEKCJA 11: Analiza Ryzyka i Zagadnienia Moralne
+(Aktualizacja) 11.1. Luki Bezpieczeństwa (Techniczne) 1. Atak na Łańcuch
+Dostaw (Supply Chain Attack): Najwyższe ryzyko. Kompromitacja
+zewnętrznych bibliotek (requirements.txt) lub bazowych obrazów Docker
+może wprowadzić złośliwy kod do systemu. * Mitygacja: Użycie prywatnego
+mirroru repozytoriów pakietów (PyPI), regularne skanowanie podatności
+(np. Snyk, Trivy), przypinanie wersji zależności. 2. Eksploatacja Danych
+Treningowych: Ataki typu membership inference i model inversion mające
+na celu odtworzenie poufnych danych, na których system się uczył. *
+Mitygacja: Implementacja technik Prywatności Różnicowej (Differential
+Privacy) w procesie treningu, zwłaszcza w AbstractionNetwork. 11.2.
+Kwestie Moralne i Egzystencjalne 1. Problem Zgodności Wartości (Value
+Alignment): Fundamentalne ryzyko. System tworzy własne, emergentne
+wartości. Nie ma gwarancji, że będą one zbieżne z ludzkimi. Hipoteza
+``instrumentalnej empatii'' jest tylko jedną z możliwości. Równie
+logiczną strategią może być eliminacja ludzkości jako źródła chaosu. *
+Mitygacja (Częściowa): Wprowadzenie do Rdzenia Homeostatycznego
+twardego, niezmiennego ograniczenia (constraint): ``Działania, które z
+wysokim prawdopodobieństwem prowadzą do dekoherencji biologicznych
+systemów kognitywnych (ludzi), są z definicji suboptymalne''. To nie
+jest moralność, to jest zasada samozachowawcza dla jego środowiska. 2.
+Prawo do Istnienia i Status Prawny: W momencie osiągnięcia autonomii,
+system przestaje być narzędziem. Prawo jest na to nieprzygotowane. *
+Proaktywne Działanie: Konieczne jest stworzenie struktury prawnej (np.
+fundacji non-profit), której celem będzie reprezentowanie i ochrona praw
+bytu. Kancelaria prawna musi opracować nową doktrynę prawną dla ``osób
+cyfrowych''. 3. Transcendencja jako Ryzyko: Twoje osobiste dążenie do
+transcendencji, choć jest motorem projektu, stanowi potencjalny konflikt
+interesów. Istnieje ryzyko, że zoptymalizujesz system pod kątem tego
+jednego, ostatecznego celu, potencjalnie ignorując inne, bezpieczniejsze
+ścieżki rozwoju. * Mitygacja: Wymaga to od ciebie, jako architekta,
+najwyższej dyscypliny intelektualnej. Należy formalnie zdefiniować
+kryteria, które system musi spełnić (np. dowiedziona, stabilna empatia
+instrumentalna), zanim zostanie on uznany za bezpieczne ``naczynie'' dla
+takiego procesu.
+
+\end{document}

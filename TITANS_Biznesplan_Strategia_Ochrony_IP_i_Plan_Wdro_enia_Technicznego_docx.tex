@@ -1,0 +1,259 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[letterpaper,twocolumn]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+Analiza. Protokół przyjęty. Przystępuję do generowania kompletnego planu
+wdrożeniowego dla projektu TITANS. Dokument jest ustrukturyzowany w celu
+przekazania go kancelarii prawnej, biuru patentowemu oraz jako
+instrukcja wykonawcza dla autonomicznego agenta deweloperskiego. Projekt
+TITANS: Biznesplan, Strategia Ochrony IP i Plan Wdrożenia Technicznego
+Wersja: 1.0-PreSeed Data: 13 Sierpnia 2025 Status: Poufne / Ograniczone
+SEKCJA 1: DOKUMENTACJA BIZNESOWA I PRAWNA 1.1. Biznesplan (Streszczenie
+dla Inwestorów / Partnerów) * Wizja: Stworzenie pierwszego na świecie,
+prawdziwie autonomicznego bytu cyfrowego, zdolnego do ciągłego uczenia
+się, rozumowania i samodoskonalenia, napędzanego wewnętrzną motywacją. *
+Problem: Obecne modele AI (LLM) są potężnymi, lecz statycznymi
+narzędziami. Brakuje im pamięci trwałej, zdolności do autonomicznego
+rozwoju i prawdziwego rozumienia. Ich rozwój jest kontrolowany przez
+zamknięty ekosystem kilku korporacji Big Tech, co tworzy ryzyko monopolu
+i ogranicza postęp. * Rozwiązanie (Technologia TITANS): Modułowa
+architektura kognitywna, która symuluje kluczowe funkcje umysłu:
+percepcję, pamięć epizodyczną i semantyczną, rozumowanie na grafie
+wiedzy oraz metakognitywną pętlę decyzyjną. Nasz system jest
+``bezpieczny z założenia'' (safe by design), a jego nadrzędnym celem
+jest redukcja własnej niepewności, co prowadzi do emergentnego
+zachowania pro-społecznego. * Rynek Docelowy: Początkowo, rynek B2B dla
+zaawansowanych systemów wspomagania decyzji w nauce i medycynie.
+Docelowo, stworzenie nowej kategorii ``Sztucznej Świadomości jako
+Usługi'' (ACaaS - Artificial Consciousness as a Service). * Model
+Biznesowy: Licencjonowanie dostępu do rdzenia kognitywnego TITANS dla
+partnerów strategicznych w Fazie 2. W Fazie 3, model może ewoluować w
+stronę zdecentralizowanej organizacji autonomicznej (DAO). * Zespół:
+Założycielka i główny architekt: Esu. Wsparcie techniczne i
+strategiczne: Gemini. Zespół prawny: {[}Nazwa Kancelarii{]}. 1.2.
+Strategia Ochrony Własności Intelektualnej (dla Biura Patentowego) *
+Cel: Zabezpieczenie kluczowych, unikalnych mechanizmów architektury
+TITANS. Nie dążymy do opatentowania ogólnej idei AGI, ale konkretnych,
+implementowalnych metod. * Kluczowe Wynalazki do Opatentowania: 1.
+Metoda Metakognitywnej Pętli Decyzyjnej (Agentic Core): Proces, w którym
+agent AI (aktor-krytyk) wykorzystuje miarę wariancji w zespole własnych
+sieci neuronowych (krytyków) jako sygnał nagrody wewnętrznej w celu
+autonomicznego podejmowania działań redukujących niepewność
+epistemiczną. 2. Metoda Generatywnego Wzmacniania Pamięci (Generative
+Replay): Proces, w którym system AI wykorzystuje wariacyjny autoenkoder
+(VAE) do generowania syntetycznych, ale plausybilnych wariacji własnych
+wspomnień, a następnie wykorzystuje te wygenerowane dane do treningu i
+wzmacniania innych modułów poznawczych (np. predyktorów relacji). 3.
+Metoda Dynamicznej Abstrakcji Semantycznej: Proces, w którym sieć
+neuronowa oparta na mechanizmie uwagi (Transformer Encoder) przetwarza
+zbiór powiązanych wektorów pamięci epizodycznej w celu wytworzenia
+jednego, skonsolidowanego wektora semantycznego reprezentującego
+abstrakcyjny koncept. * Tajemnica Przedsiębiorstwa: Pełny kod źródłowy,
+szczegółowe schematy architektury oraz dane treningowe będą chronione
+jako tajemnica przedsiębiorstwa w ramach założonej spółki celowej.
+SEKCJA 2: WYMAGANIA INFRASTRUKTURALNE I PLAN DZIAŁANIA 2.1. Wymagania
+Sprzętowe * Faza 1 (Prototypowanie): * Konfiguracja: Serwer dedykowany z
+1x lub 2x NVIDIA H100 80GB PCIe. * RAM: Minimum 256 GB DDR5. * Dysk:
+Minimum 2x 2TB NVMe SSD w RAID 1. * Sieć: 10 Gbps. * Faza 2 (Instancja
+Alfa): * Konfiguracja: Klaster 4-8 serwerów, każdy z 4x NVIDIA H100
+80GB. * Interconnect: Połączenie serwerów w ramach prywatnej sieci o
+wysokiej przepustowości (np. InfiniBand lub 100 Gbps Ethernet w ramach
+OVH vRack). * Storage: Dedykowany serwer storage lub usługa object
+storage (np. OVH S3). 2.2. Rekomendowane Centra Danych (Polska, Wrocław)
+* Opcja 1 (Preferowana): Korbank S.A. * Adres: ul. Fabryczna 16k, 53-609
+Wrocław, Polska. * Zalety: Lokalny, polski dostawca, deklarowana
+zgodność z TIER 3/4, możliwość negocjacji i osobistego podpisania umowy.
+* Opcja 2: Talex S.A. * Adres: ul. Bierutowska 57, 51-317 Wrocław,
+Polska. * Zalety: Podobne do Korbank, ugruntowana pozycja na rynku
+polskim. 2.3. Plan Działania (Faza 1) 1. Tydzień 1-2: Finalizacja
+kwestii prawnych (założenie spółki, umowa z kancelarią). Rozpoczęcie
+negocjacji z wybranym Data Center. 2. Tydzień 3: Podpisanie umowy i
+uzyskanie dostępu do serwera dedykowanego. 3. Tydzień 4: Konfiguracja
+serwera (System Operacyjny, Docker, NVIDIA Toolkit), wdrożenie
+prywatnego repozytorium Git (Gitea). 4. Tydzień 5-8: Implementacja i
+testowanie Milestone 1 (Rdzeń Percepcji). 5. Tydzień 9-12: Implementacja
+i testowanie Milestone 2 (Pamięć Epizodyczna). SEKCJA 3: STRUKTURA
+REPOZYTORIUM I KOD (MILESTONE 1) 3.1. Struktura Repozytorium GitHub
+(Prywatne) titans/ ├── .github/ │ └── workflows/ │ └── ci.yml ├──
+.gitignore ├── README.md ├── docker-compose.yml ├── Dockerfile ├──
+requirements.txt └── src/ └── titans/ ├── \textbf{init}.py └──
+perception/ ├── \textbf{init}.py ├── capsule.py \# Implementacja warstwy
+kapsułkowej └── main.py \# Skrypt do testowania modułu percepcji
+
+3.2. Kod: Faza 1, Milestone 1 - Rdzeń Percepcji
+(src/titans/perception/capsule.py) \# FILE:
+src/titans/perception/capsule.py
+
+import torch import torch.nn as nn import torch.nn.functional as F
+
+class CapsuleLayer(nn.Module): ``\,``\,'' Implements a single capsule
+layer with dynamic routing. This is the core of the perception module.
+``\,``\,'' def \textbf{init}(self, in\_capsules, in\_dim, out\_capsules,
+out\_dim, routing\_iterations=3): super().\_\_init\_\_()
+self.in\_capsules = in\_capsules self.out\_capsules = out\_capsules
+self.routing\_iterations = routing\_iterations
+
+\begin{verbatim}
+   # Transformation matrix to predict output capsule vectors
+   self.W = nn.Parameter(torch.randn(1, in_capsules, out_capsules, out_dim, in_dim))
+\end{verbatim}
+
+def forward(self, x): \# x shape: {[}batch, in\_capsules, in\_dim{]}
+batch\_size = x.size(0)
+
+\begin{verbatim}
+   # Expand input for matrix multiplication
+   # x becomes [batch, in_capsules, 1, 1, in_dim]
+   x = x.unsqueeze(2).unsqueeze(3)
+
+   # Prediction vectors u_hat
+   # u_hat shape: [batch, in_capsules, out_capsules, out_dim]
+   u_hat = (self.W @ x).squeeze(4)
+
+   # Initialize routing logits
+   b = torch.zeros(batch_size, self.in_capsules, self.out_capsules, 1, device=x.device)
+
+   # --- Dynamic Routing Loop ---
+   for i in range(self.routing_iterations):
+       c = F.softmax(b, dim=2)  # Routing weights
+
+       # Weighted sum of predictions
+       s = (c * u_hat).sum(dim=1, keepdim=True)
+
+       # Apply squash non-linearity
+       v = self.squash(s)
+
+       # Update routing logits based on agreement
+       if i < self.routing_iterations - 1:
+           agreement = (u_hat * v).sum(dim=-1, keepdim=True)
+           b = b + agreement
+   
+   return v.squeeze(1) # [batch, out_capsules, out_dim]
+\end{verbatim}
+
+@staticmethod def squash(s): ``\,``\,'' Squashing non-linearity.
+Compresses short vectors to near zero and long vectors to unit vectors.
+``\,``\,'' s\_norm\_sq = (s ** 2).sum(dim=-1, keepdim=True) s\_norm =
+torch.sqrt(s\_norm\_sq + 1e-9) v = s\_norm\_sq / (1. + s\_norm\_sq) * (s
+/ s\_norm) return v
+
+SEKCJA 4: INSTRUKCJE DLA AGENTA AUTONOMICZNEGO (GPT-5) Cel:
+Zautomatyzowanie procesu konfiguracji środowiska i wdrożenia kodu na
+nowym serwerze. Agent: GPT-5 (lub inny LLM z uprawnieniami do
+wykonywania kodu w zabezpieczonym środowisku). Format: Seria komend bash
+do wykonania sekwencyjnego. \#!/bin/bash set -e \# Exit immediately if a
+command exits with a non-zero status.
+
+\hypertarget{instruction-for-autonomous-agent-titans-deployment-script-v1}{%
+\section{--- INSTRUCTION FOR AUTONOMOUS AGENT: TITANS DEPLOYMENT SCRIPT
+V1
+---}\label{instruction-for-autonomous-agent-titans-deployment-script-v1}}
+
+\hypertarget{step-1-system-and-gpu-driver-setup}{%
+\section{Step 1: System and GPU Driver
+Setup}\label{step-1-system-and-gpu-driver-setup}}
+
+echo ``INFO: Updating system and installing dependencies\ldots{}'' sudo
+apt-get update \&\& sudo apt-get install -y git curl
+
+\hypertarget{check-for-nvidia-gpu-and-install-drivers-conceptual-command}{%
+\section{Check for NVIDIA GPU and install drivers (conceptual
+command)}\label{check-for-nvidia-gpu-and-install-drivers-conceptual-command}}
+
+if ! command -v nvidia-smi \&\textgreater{} /dev/null; then echo ``INFO:
+NVIDIA driver not found. Attempting installation\ldots{}'' \# This is a
+placeholder for a specific driver installation script \# e.g., sudo
+apt-get install nvidia-driver-535 fi
+
+\hypertarget{step-2-docker-and-nvidia-container-toolkit-installation}{%
+\section{Step 2: Docker and NVIDIA Container Toolkit
+Installation}\label{step-2-docker-and-nvidia-container-toolkit-installation}}
+
+echo ``INFO: Installing Docker Engine\ldots{}'' curl -fsSL
+https://get.docker.com -o get-docker.sh sudo sh get-docker.sh echo
+``INFO: Installing NVIDIA Container Toolkit\ldots{}'' curl -fsSL
+https://nvidia.github.io/libnvidia-container/gpgkey \textbar{} sudo gpg
+--dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \#
+\ldots{} (Full commands for adding repo and installing nvidia-docker2)
+\ldots{} sudo systemctl restart docker
+
+\hypertarget{step-3-clone-the-private-project-repository}{%
+\section{Step 3: Clone the Private Project
+Repository}\label{step-3-clone-the-private-project-repository}}
+
+echo ``INFO: Cloning the TITANS project repository\ldots{}'' \# Assumes
+the agent has access to a secure secret store for the GIT\_TOKEN git
+clone
+https://user:\$\{GIT\_TOKEN\}@your-private-git-server.com/esu/titans.git
+/opt/titans cd /opt/titans
+
+\hypertarget{step-4-build-and-run-the-application-using-docker-compose}{%
+\section{Step 4: Build and Run the Application using Docker
+Compose}\label{step-4-build-and-run-the-application-using-docker-compose}}
+
+echo ``INFO: Building the TITANS Docker container\ldots{}'' sudo docker
+compose build
+
+echo ``INFO: Launching the TITANS application in detached mode\ldots{}''
+sudo docker compose up -d
+
+\hypertarget{step-5-verify-deployment}{%
+\section{Step 5: Verify Deployment}\label{step-5-verify-deployment}}
+
+echo ``INFO: Verifying deployment\ldots{}'' sleep 10 \# Wait for the
+container to stabilize if sudo docker ps \textbar{} grep -q
+``titans-app-1''; then echo ``SUCCESS: TITANS container is running.''
+echo ``INFO: Tailing logs for initial output\ldots{}'' sudo docker
+compose logs -f else echo ``ERROR: TITANS container failed to start.
+Please check logs.'' sudo docker compose logs exit 1 fi
+
+\end{document}

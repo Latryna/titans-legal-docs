@@ -1,0 +1,321 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[letterpaper,twocolumn]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+Kontynuacja. Przystępuję do implementacji planu dla Milestone 4 i 5.
+SEKCJA 7: PLAN IMPLEMENTACJI - MILESTONE 4 (Rozumowanie Semantyczne)
+7.1. Cel Architektoniczny Wdrożenie silnika inferencyjnego zdolnego do
+wykonywania wieloetapowego rozumowania na grafie wiedzy. Celem jest
+umożliwienie systemowi rozwiązywania analogii i odkrywania ukrytych
+relacji między konceptami. 7.2. Struktura Repozytorium (Rozszerzenie)
+src/ └── titans/ ├── \ldots{} └── reasoning/ ├── \ldots{} ├── gnn.py \#
+Implementacja GAT i Edge Predictor └── main.py \# Skrypt do treningu i
+walidacji M4
+
+7.3. Kod: Rdzeń Rozumowania Semantycznego (src/titans/reasoning/gnn.py)
+\# FILE: src/titans/reasoning/gnn.py
+
+import torch import torch.nn as nn import torch.nn.functional as F from
+torch\_geometric.nn import GATConv
+
+class EdgePredictor(nn.Module): ``\,````Predicts a relational vector
+between two concept vectors.''``\,'' def \textbf{init}(self, embed\_dim:
+int, relation\_dim: int): super().\_\_init\_\_() self.network =
+nn.Sequential( nn.Linear(embed\_dim * 2, embed\_dim),
+nn.LayerNorm(embed\_dim), nn.ReLU(), nn.Linear(embed\_dim,
+relation\_dim) )
+
+def forward(self, vec1: torch.Tensor, vec2: torch.Tensor)
+-\textgreater{} torch.Tensor: return self.network(torch.cat({[}vec1,
+vec2{]}, dim=-1))
+
+class ReasoningGAT(nn.Module): ``\,``\,'' A multi-layer Graph Attention
+Network for propagating information across the Cognitive Graph.
+``\,``\,'' def \textbf{init}(self, in\_channels: int, hidden\_channels:
+int, out\_channels: int, num\_heads: int): super().\_\_init\_\_()
+self.conv1 = GATConv(in\_channels, hidden\_channels, heads=num\_heads,
+concat=True) self.conv2 = GATConv(hidden\_channels * num\_heads,
+out\_channels, heads=1, concat=False) self.dropout = nn.Dropout(0.6)
+
+def forward(self, x: torch.Tensor, edge\_index: torch.Tensor)
+-\textgreater{} torch.Tensor: x = F.dropout(x, p=0.6,
+training=self.training) x = F.elu(self.conv1(x, edge\_index)) x =
+F.dropout(x, p=0.6, training=self.training) x = self.conv2(x,
+edge\_index) return x
+
+7.4. Instrukcje dla Agenta Autonomicznego (Trening i Walidacja Milestone
+4) \#!/bin/bash set -e
+
+\hypertarget{instruction-for-autonomous-agent-titans-m4-training-script}{%
+\section{--- INSTRUCTION FOR AUTONOMOUS AGENT: TITANS M4 TRAINING SCRIPT
+---}\label{instruction-for-autonomous-agent-titans-m4-training-script}}
+
+cd /opt/titans
+
+\hypertarget{step-1-execute-the-milestone-4-training-and-validation-script}{%
+\section{Step 1: Execute the Milestone 4 training and validation
+script}\label{step-1-execute-the-milestone-4-training-and-validation-script}}
+
+echo ``INFO: Running Milestone 4 (Semantic Reasoning) training\ldots{}''
+
+\hypertarget{create-the-main-trainingvalidation-script}{%
+\section{Create the main training/validation
+script}\label{create-the-main-trainingvalidation-script}}
+
+cat \textless\textless{} `EOF' \textgreater{}
+src/titans/reasoning/main.py import torch import torch.nn as nn import
+torch.nn.functional as F from torch\_geometric.data import Data from
+titans.reasoning.gnn import EdgePredictor, ReasoningGAT import random
+
+def get\_synthetic\_data(num\_concepts=20, embed\_dim=64, rel\_dim=16):
+``\,````Generates a synthetic knowledge graph for training.''``\,''
+concepts = \{f''c\{i\}``: torch.randn(embed\_dim) for i in
+range(num\_concepts)\} triplets = {[}{]} for \_ in range(100): h, t =
+random.sample(list(concepts.keys()), 2) \# Relation is the difference
+vector rel = concepts{[}t{]} - concepts{[}h{]} triplets.append(\{`head':
+concepts{[}h{]}, `tail': concepts{[}t{]}, `relation': rel\}) return
+concepts, triplets
+
+def run\_training\_and\_validation(): print(``--- Training and
+Validating M4: Semantic Reasoning ---'') EMBED\_DIM, REL\_DIM = 64, 16
+GAT\_HIDDEN, GAT\_HEADS = 32, 4
+
+concepts, triplets = get\_synthetic\_data(embed\_dim=EMBED\_DIM,
+rel\_dim=REL\_DIM)
+
+\# 1. Train Edge Predictor edge\_predictor = EdgePredictor(EMBED\_DIM,
+REL\_DIM) optimizer = torch.optim.Adam(edge\_predictor.parameters(),
+lr=1e-3) print(``Training Edge Predictor\ldots{}'') for epoch in
+range(50): \# Simplified training loop for triplet in triplets:
+optimizer.zero\_grad() pred\_rel = edge\_predictor(triplet{[}`head'{]},
+triplet{[}`tail'{]}) loss = F.mse\_loss(pred\_rel,
+triplet{[}`relation'{]}) loss.backward() optimizer.step()
+
+\# 2. Validate GAT Reasoning (Analogy: c0:c1 :: c2:?) print(``Validating
+GAT for analogical reasoning\ldots{}'') reasoning\_gat =
+ReasoningGAT(EMBED\_DIM, GAT\_HIDDEN, EMBED\_DIM, GAT\_HEADS)
+
+query\_ids = {[}``c0'', ``c1'', ``c2'', ``c3''{]} \# c3 is the expected
+answer node\_features = torch.stack({[}concepts{[}cid{]} for cid in
+query\_ids{]}) \# Assume edges exist between (c0,c1) and (c2,c3) and
+others, forming a graph edge\_index = torch.tensor({[}{[}0, 1, 2, 3, 0,
+2{]}, {[}1, 0, 3, 2, 2, 0{]}{]}, dtype=torch.long)
+
+c2\_vec\_before = concepts{[}``c2''{]}.clone() updated\_features =
+reasoning\_gat(node\_features, edge\_index) c2\_vec\_after =
+updated\_features{[}2{]} \# Get the updated vector for ``c2''
+
+\# The reasoning process should move the ``c2'' vector closer to the
+true answer ``c3'' dist\_before = torch.linalg.norm(c2\_vec\_before -
+concepts{[}``c3''{]}) dist\_after = torch.linalg.norm(c2\_vec\_after -
+concepts{[}``c3''{]})
+
+print(f''Distance to target before GAT: \{dist\_before.item():.4f\}``)
+print(f''Distance to target after GAT: \{dist\_after.item():.4f\}``)
+
+assert dist\_after \textless{} dist\_before, ``Reasoning failed: GAT did
+not improve vector similarity.'' print(``SUCCESS: Milestone 4 test
+passed.'')
+
+if \textbf{name} == ``\textbf{main}'': run\_training\_and\_validation()
+EOF
+
+\hypertarget{run-the-training-and-validation}{%
+\section{Run the training and
+validation}\label{run-the-training-and-validation}}
+
+python src/titans/reasoning/main.py
+
+SEKCJA 8: PLAN IMPLEMENTACJI - MILESTONE 5 (Rdzeń Agentowy) 8.1. Cel
+Architektoniczny Implementacja finalnej pętli metakognitywnej.
+Stworzenie autonomicznego agenta, który obserwuje stan własnej wiedzy
+(grafu) i podejmuje ``działania kognitywne'' w celu minimalizacji
+wewnętrznej niepewności. 8.2. Struktura Repozytorium (Rozszerzenie) src/
+└── titans/ ├── \ldots{} └── core/ ├── \textbf{init}.py ├── agent.py \#
+Implementacja AgenticCore i pętli A2C └── models.py \# Definicje
+ActorGNN i CriticGNN
+
+8.3. Kod: Rdzeń Agentowy (src/titans/core/agent.py) \# FILE:
+src/titans/core/agent.py
+
+import torch import torch.nn.functional as F from torch\_geometric.data
+import Data from enum import Enum import copy import random from .models
+import ActorGNN, CriticGNN
+
+class CognitiveAction(Enum): QUERY\_NEW\_CONCEPT = 0
+STRENGTHEN\_RELATION = 1
+
+class AgenticCore: def \textbf{init}(self, cgm, embed\_dim,
+num\_critics=5, gamma=0.99): self.cgm = cgm self.num\_actions =
+len(CognitiveAction) self.gamma = gamma self.critic\_ensemble =
+{[}CriticGNN(embed\_dim, 32, 4) for \_ in range(num\_critics){]}
+self.actor = ActorGNN(embed\_dim, 32, self.num\_actions, 4)
+self.actor\_optimizer = torch.optim.Adam(self.actor.parameters(),
+lr=1e-4) self.critic\_optimizers = {[}torch.optim.Adam(c.parameters(),
+lr=1e-3) for c in self.critic\_ensemble{]}
+
+def \_get\_critic\_values(self, state: Data) -\textgreater{}
+torch.Tensor: with torch.no\_grad(): return
+torch.tensor({[}critic(state).item() for critic in
+self.critic\_ensemble{]})
+
+def \_calculate\_intrinsic\_reward(self, state\_before: Data,
+state\_after: Data) -\textgreater{} float: var\_before =
+torch.var(self.\_get\_critic\_values(state\_before)).item() var\_after =
+torch.var(self.\_get\_critic\_values(state\_after)).item() return
+var\_before - var\_after
+
+def \_execute\_cognitive\_action(self, action: CognitiveAction):
+new\_cgm = copy.deepcopy(self.cgm) \# Simplified action execution if
+action == CognitiveAction.QUERY\_NEW\_CONCEPT and
+len(new\_cgm.semantic\_memory) \textgreater{} 0: new\_id =
+f''c\{len(new\_cgm.semantic\_memory)\}''
+new\_cgm.semantic\_memory{[}new\_id{]} =
+torch.randn\_like(list(new\_cgm.semantic\_memory.values()){[}0{]})
+return new\_cgm.construct\_graph\_state()
+
+def run\_cognitive\_step(self): state =
+self.cgm.construct\_graph\_state() if state is None: return 0.0,
+``NO\_STATE''
+
+\begin{verbatim}
+   action_logits = self.actor(state)
+   action_dist = torch.distributions.Categorical(logits=action_logits)
+   action = CognitiveAction(action_dist.sample().item())
+   log_prob = action_dist.log_prob(torch.tensor(action.value))
+
+   new_state = self._execute_cognitive_action(action)
+   reward = self._calculate_intrinsic_reward(state, new_state)
+
+   # A2C update
+   value_before = self._get_critic_values(state).mean()
+   value_after = self._get_critic_values(new_state).mean()
+   advantage = reward + self.gamma * value_after - value_before
+
+   actor_loss = -log_prob * advantage.detach()
+   self.actor_optimizer.zero_grad()
+   actor_loss.backward()
+   self.actor_optimizer.step()
+   
+   critic_target = reward + self.gamma * value_after
+   for critic, optimizer in zip(self.critic_ensemble, self.critic_optimizers):
+       critic_loss = F.mse_loss(critic(state), torch.tensor([[critic_target]]))
+       optimizer.zero_grad()
+       critic_loss.backward()
+       optimizer.step()
+       
+   self.cgm.semantic_memory = new_state.x # Update state
+   return reward, action.name
+\end{verbatim}
+
+8.4. Instrukcje dla Agenta Autonomicznego (Finalna Walidacja)
+\#!/bin/bash set -e
+
+\hypertarget{instruction-for-autonomous-agent-titans-m5-validation-script}{%
+\section{--- INSTRUCTION FOR AUTONOMOUS AGENT: TITANS M5 VALIDATION
+SCRIPT
+---}\label{instruction-for-autonomous-agent-titans-m5-validation-script}}
+
+cd /opt/titans
+
+\hypertarget{step-1-execute-the-final-validation-script}{%
+\section{Step 1: Execute the final validation
+script}\label{step-1-execute-the-final-validation-script}}
+
+echo ``INFO: Running final validation of the Agentic Core\ldots{}'' \#
+Create the main script file cat \textless\textless{} `EOF'
+\textgreater{} src/titans/core/main.py import torch from
+titans.core.agent import AgenticCore from titans.reasoning.gnn import
+ReasoningGAT from titans.core.models import ActorGNN, CriticGNN \# A
+simplified CognitiveGraphMemory for the test class MockCGM: def
+\textbf{init}(self, embed\_dim): self.semantic\_memory = \{f''c\{i\}``:
+torch.randn(embed\_dim) for i in range(5)\} def
+construct\_graph\_state(self): from torch\_geometric.data import Data if
+len(self.semantic\_memory) \textless{} 2: return None x =
+torch.stack(list(self.semantic\_memory.values())) edge\_index =
+torch.tensor({[}{[}0,1,1,2,2,3,3,4,4,0{]},{[}1,0,2,1,3,2,4,3,0,4{]}{]},
+dtype=torch.long) return Data(x=x, edge\_index=edge\_index)
+
+def run\_validation(): print(``--- Validating M5: Agentic Core Cognitive
+Loop ---'') EMBED\_DIM = 32 cgm = MockCGM(EMBED\_DIM) agent =
+AgenticCore(cgm, EMBED\_DIM)
+
+initial\_variance =
+torch.var(agent.\_get\_critic\_values(cgm.construct\_graph\_state())).item()
+print(f''Initial critic variance (uncertainty):
+\{initial\_variance:.6f\}``)
+
+\# Run several cognitive steps for step in range(10): reward,
+action\_name = agent.run\_cognitive\_step() print(f''Step \{step+1\}:
+Action=`\{action\_name\}', Reward=\{reward:.6f\}``)
+
+final\_variance =
+torch.var(agent.\_get\_critic\_values(cgm.construct\_graph\_state())).item()
+print(f''Final critic variance (uncertainty): \{final\_variance:.6f\}``)
+
+assert final\_variance \textless{} initial\_variance, ``Agent failed to
+reduce its uncertainty.'' print(``SUCCESS: Milestone 5 validation
+passed. Agent is learning to reduce uncertainty.'')
+
+if \textbf{name} == ``\textbf{main}'': \# Monkey-patching GAT for test
+without full M4 dependency from titans.core import models
+models.ReasoningGAT = type(`ReasoningGAT', (torch.nn.Module,), \{
+``\textbf{init}'': lambda self, i, h, o, n: (super(type(self),
+self).\_\_init\_\_(), setattr(self, `gat', GATConv(i, o, heads=n))),
+``forward'': lambda self, x, e: self.gat(x, e) \}) run\_validation() EOF
+
+\hypertarget{run-the-final-validation}{%
+\section{Run the final validation}\label{run-the-final-validation}}
+
+python src/titans/core/main.py
+
+\end{document}
