@@ -908,6 +908,19 @@ specyfikacjami.
 \bibliographystyle{plain}
 \bibliography{references}
 
+\section{Integracja z OpenRouter i LM Studio}
+\label{sec:integration}
+
+Projekt TITANS został zintegrowany z otwartym interfejsem sieciowym poprzez usługę OpenRouter, która umożliwia dostęp do zewnętrznych modeli językowych (np. GPT‑4, Claude) oraz lokalnych modeli uruchomionych w LM Studio.  Agent TITANS działa jako lokalny serwer REST udostępniający następujące punkty końcowe:
+
+\begin{itemize}
+\item \texttt{/chat} – obsługa dialogów z agentem; przyjmuje zapytania i zwraca odpowiedzi generowane przez model TITANS z kontekstową pamięcią epizodyczną i semantyczną.
+\item \texttt{/graph} – zwraca aktualny graf wiedzy łączący jednostki i fakty przechowywane w pamięci semantycznej.
+\item \texttt{/memory} – pozwala na zapisywanie i odczyt epizodów z pamięci epizodycznej (Milestone~2) oraz przekształconych reprezentacji semantycznych (Milestones~4–5).
+\end{itemize}
+
+W ramach integracji z LM Studio wykorzystano lokalny model \texttt{mixtal-8x7b-instruct-v0.1}, dostępny pod adresem \texttt{http://localhost:5005}.  Dzięki temu TITANS może funkcjonować jako agent hybrydowy: korzysta z lokalnej percepcji i modułów pamięci, a jednocześnie uzyskuje dostęp do mocy obliczeniowej zewnętrznych modeli poprzez OpenRouter.
+
 \end{document}
 
 . Plan Eksperymentów i Artefakty
