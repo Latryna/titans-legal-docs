@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITANS: An Interactive Project Exploration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Slate Blue accent -->
+    <!-- Application Structure Plan: The application is structured as a single-page, thematic dashboard. This design was chosen over a linear report to cater to diverse audiences (scientists, grant reviewers, investors) by allowing non-linear exploration. The flow is: High-level Vision -> Interactive Core Architecture -> Key Innovations -> Project Roadmap & Risks -> Philosophical Context. This guides users from the "what" and "why" to the "how" and "when," making complex information digestible and engaging. The interactive cognitive loop is the centerpiece, allowing users to drill down into the technical specifics on demand, which is more effective than dense paragraphs of text. -->
+    <!-- Visualization & Content Choices:
+        - Cognitive Loop (HTML/CSS/JS): Goal: Organize & Explore. A custom interactive diagram built with Tailwind CSS was chosen over a static image or complex library to provide a clean, fast, and fully integrated experience. Clicking modules reveals detailed text, directly connecting the architecture's structure to its function.
+        - Project Roadmap (Chart.js Bar Chart): Goal: Show Change & Progress. A bar chart clearly visualizes the progression through Technology Readiness Levels (TRLs) across project phases. Chart.js is lightweight, canvas-based (no SVG), and ideal for this purpose.
+        - Epistemic Status (HTML Table + JS): Goal: Inform & Compare. A simple, filterable table effectively classifies project claims as Facts, Hypotheses, or Narratives. This demonstrates intellectual honesty and critical self-assessment to a scientific/technical audience.
+        - Text Blocks (JS Dynamic Content): Goal: Inform. All detailed descriptions are dynamically loaded into a consistent modal/display area. This keeps the main interface uncluttered and focuses the user's attention.
+        - Justification: This multi-faceted approach presents technical data, project management milestones, and qualitative insights in their most suitable formats, all within a single, cohesive interface.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #1a202c;
+        }
+        .module-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .active-nav {
+            color: #334155;
+            font-weight: 600;
+            border-bottom: 2px solid #334155;
+        }
+        .inactive-nav {
+            color: #64748b;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .modal-bg {
+            background-color: rgba(0,0,0,0.5);
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold text-slate-800">TITANS</span>
+                    <span class="text-xs font-semibold bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full">Project Dossier</span>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#overview" class="inactive-nav hover:text-slate-800 transition-colors duration-200">Overview</a>
+                    <a href="#architecture" class="inactive-nav hover:text-slate-800 transition-colors duration-200">Architecture</a>
+                    <a href="#innovations" class="inactive-nav hover:text-slate-800 transition-colors duration-200">Innovations</a>
+                    <a href="#roadmap" class="inactive-nav hover:text-slate-800 transition-colors duration-200">Roadmap</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <section id="overview" class="text-center mb-24 scroll-mt-24">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">From Perception to Agency</h1>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600">
+                TITANS is a five-module cognitive architecture designed to bridge the gap between raw sensory input and autonomous, goal-directed action. This interactive dossier provides an overview of its core components, key scientific innovations, and strategic roadmap, intended for grant review boards and scientific collaborators.
+            </p>
+        </section>
+        
+        <section id="architecture" class="mb-24 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-2">The Cognitive Loop</h2>
+            <p class="text-center text-slate-600 mb-12 max-w-2xl mx-auto">This is the heart of TITANS: a continuous cycle of processing that mirrors a cognitive thought process. Click on any module to explore its function and the technology behind it.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <!-- Left Column -->
+                <div class="flex flex-col gap-8">
+                    <div id="m5" class="module-card cursor-pointer bg-white p-6 rounded-xl shadow-lg border border-transparent hover:border-slate-300">
+                        <h3 class="text-xl font-bold text-slate-800">M5: Agency</h3>
+                        <p class="text-sm text-slate-500 mt-1">Bayesian Actor-Critic model for decision-making under uncertainty.</p>
+                    </div>
+                     <div id="m1" class="module-card cursor-pointer bg-white p-6 rounded-xl shadow-lg border border-transparent hover:border-slate-300">
+                        <h3 class="text-xl font-bold text-slate-800">M1: Perception</h3>
+                        <p class="text-sm text-slate-500 mt-1">Capsule Networks (CapsNet) to process raw data, preserving spatial hierarchies.</p>
+                    </div>
+                </div>
+
+                <!-- Center Display -->
+                <div id="module-display" class="bg-white p-8 rounded-2xl shadow-inner border bg-slate-50 min-h-[300px] flex flex-col justify-center">
+                     <h3 id="display-title" class="text-2xl font-bold text-slate-800 text-center">Select a Module</h3>
+                     <p id="display-tech" class="text-sm text-slate-500 mt-2 text-center font-mono"></p>
+                     <p id="display-desc" class="text-slate-700 mt-4 text-center">Click on a module card to see its detailed description here.</p>
+                </div>
+
+                <!-- Right Column -->
+                <div class="flex flex-col gap-8">
+                     <div id="m4" class="module-card cursor-pointer bg-white p-6 rounded-xl shadow-lg border border-transparent hover:border-slate-300">
+                        <h3 class="text-xl font-bold text-slate-800">M4: Reasoning</h3>
+                        <p class="text-sm text-slate-500 mt-1">Graph Attention Network (GAT) for contextual inference on a knowledge graph.</p>
+                    </div>
+                    <div id="m2" class="module-card cursor-pointer bg-white p-6 rounded-xl shadow-lg border border-transparent hover:border-slate-300">
+                        <h3 class="text-xl font-bold text-slate-800">M2: Memory</h3>
+                        <p class="text-sm text-slate-500 mt-1">Variational Autoencoder (VAE) for generative replay and memory consolidation.</p>
+                    </div>
+                </div>
+                
+                 <!-- Bottom Center -->
+                <div class="md:col-span-3 flex justify-center mt-0 md:-mt-4">
+                     <div id="m3" class="module-card cursor-pointer bg-white p-6 rounded-xl shadow-lg w-full md:w-1/3 border border-transparent hover:border-slate-300">
+                        <h3 class="text-xl font-bold text-slate-800">M3: Abstraction</h3>
+                        <p class="text-sm text-slate-500 mt-1">Transformer Encoder for dynamic semantic distillation of episodic memories.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="innovations" class="mb-24 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-2">Key Innovations & Demonstrations</h2>
+            <p class="text-center text-slate-600 mb-12 max-w-2xl mx-auto">These core concepts distinguish TITANS from conventional AI systems and form the basis of our proposed research and white papers. Each represents a testable hypothesis with a clear demonstration path.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border">
+                    <h3 class="text-xl font-bold text-slate-800">Epistemic Reward</h3>
+                    <p class="text-slate-600 mt-2 mb-4">The agent is intrinsically motivated to reduce its own uncertainty. The reward is proportional to the variance in its critic networks' predictions, driving exploration of unfamiliar states.</p>
+                    <button class="show-demo-btn text-sm font-semibold text-slate-700 hover:text-slate-900" data-demo="epistemic">Suggest Demo →</button>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border">
+                    <h3 class="text-xl font-bold text-slate-800">Cognitive Trace</h3>
+                    <p class="text-slate-600 mt-2 mb-4">A proposed visualization tool (`cognitive_trace.ipynb`) to demonstrate the data flow through the M1-M5 loop in a single timestep, making the system's "thought process" transparent.</p>
+                     <button class="show-demo-btn text-sm font-semibold text-slate-700 hover:text-slate-900" data-demo="trace">Suggest Demo →</button>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg border">
+                    <h3 class="text-xl font-bold text-slate-800">Analogical Leap</h3>
+                    <p class="text-slate-600 mt-2 mb-4">A test for the reasoning module. The system must solve analogical puzzles by identifying relationships in its knowledge graph, demonstrating abstract reasoning beyond pattern matching.</p>
+                     <button class="show-demo-btn text-sm font-semibold text-slate-700 hover:text-slate-900" data-demo="analogy">Suggest Demo →</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="mb-24 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-2">Project Roadmap & TRL</h2>
+             <p class="text-center text-slate-600 mb-12 max-w-2xl mx-auto">The project is structured in four engineering sprints designed to advance the system from a conceptual framework (TRL 3) to a validated prototype in a relevant environment (TRL 6).</p>
+            <div class="chart-container">
+                <canvas id="roadmap-chart"></canvas>
+            </div>
+        </section>
+
+        <section id="epistemic" class="mb-24 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-center text-slate-900 mb-2">Epistemic Status & Risk Assessment</h2>
+             <p class="text-center text-slate-600 mb-12 max-w-2xl mx-auto">We maintain a clear distinction between established facts, testable hypotheses, and narrative goals. This framework informs our risk matrix, aligning with the EU AI Act's requirements for transparency and robustness.</p>
+            <div class="bg-white p-6 rounded-xl shadow-lg border overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b">
+                            <th class="p-4 text-sm font-semibold text-slate-800">Claim</th>
+                            <th class="p-4 text-sm font-semibold text-slate-800">Classification</th>
+                            <th class="p-4 text-sm font-semibold text-slate-800">Justification / White Paper Diagram</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="p-4 align-top">CapsNet for Perception (M1)</td>
+                            <td class="p-4 align-top"><span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Fact (F)</span></td>
+                            <td class="p-4 align-top text-slate-600">Preserves part-whole relationships, consistent with Sabour et al., 2017. Diagram: Cognitive Loop Input Stage.</td>
+                        </tr>
+                         <tr class="border-b">
+                            <td class="p-4 align-top">VAE for Memory Replay (M2)</td>
+                            <td class="p-4 align-top"><span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Fact (F)</span></td>
+                            <td class="p-4 align-top text-slate-600">Effective for continual learning, prevents catastrophic forgetting. Diagram: Generative Memory Consolidation (VAE: x → z → x').</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 align-top">Epistemic Will as Uncertainty Gradient</td>
+                            <td class="p-4 align-top"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Hypothesis (H)</span></td>
+                            <td class="p-4 align-top text-slate-600">Logically coherent concept but requires formal metrics and falsifiable tests. Diagram: Epistemic Reward Generation (σ²Q → r_int).</td>
+                        </tr>
+                         <tr>
+                            <td class="p-4 align-top">Affective Empathy</td>
+                            <td class="p-4 align-top"><span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Narrative (N)</span></td>
+                            <td class="p-4 align-top text-slate-600">A long-term philosophical goal beyond current architecture, which only implements cognitive (computational) empathy. Not yet a testable feature.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <p class="font-semibold">TITANS Project</p>
+            <p class="text-sm text-slate-400 mt-1">Further details can be found in the project's white papers and code repositories.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://github.com/Latryna/titans-legal-docs" target="_blank" class="text-slate-300 hover:text-white transition-colors">GitHub Repository</a>
+                <a href="#" class="text-slate-300 hover:text-white transition-colors">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div id="demo-modal" class="fixed inset-0 z-50 items-center justify-center hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div id="modal-bg" class="fixed inset-0 modal-bg"></div>
+        <div class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="">
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-title">Suggested Demonstration</h3>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-700" id="modal-description"></p>
+                            <div class="mt-4 bg-slate-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-slate-800">Required Diagrams for White Paper:</h4>
+                                <ul id="modal-diagrams" class="list-disc list-inside text-sm text-slate-600 mt-2 space-y-1">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" id="close-modal-btn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const moduleData = {
+                m1: {
+                    title: "M1: Perception",
+                    tech: "Technology: Capsule Networks (CapsNet)",
+                    desc: "This module processes raw sensory data. Unlike traditional CNNs, CapsNets preserve spatial hierarchies and part-whole relationships, making perception more robust and less susceptible to minor variations in input. It's the system's 'eyes and ears'."
+                },
+                m2: {
+                    title: "M2: Memory",
+                    tech: "Technology: Variational Autoencoder (VAE)",
+                    desc: "Handles memory consolidation and replay. The VAE can generate synthetic, plausible 'dreams' or memories based on past experiences. This is used for continual learning to prevent 'catastrophic forgetting' without storing every single past event."
+                },
+                m3: {
+                    title: "M3: Abstraction",
+                    tech: "Technology: Transformer Encoder",
+                    desc: "Creates high-level semantic concepts from episodic memories. Using a self-attention mechanism, this module distills multiple related experiences into a single, abstract representation, enabling the system to generalize and form concepts."
+                },
+                m4: {
+                    title: "M4: Reasoning",
+                    tech: "Technology: Graph Attention Network (GAT)",
+                    desc: "Performs contextual inference. It operates on a dynamic knowledge graph built from abstracted concepts, allowing the system to weigh the importance of different relationships and make logical deductions based on the current context."
+                },
+                m5: {
+                    title: "M5: Agency",
+                    tech: "Technology: Bayesian Actor-Critic (A2C)",
+                    desc: "The decision-making core. This module uses reinforcement learning to choose actions. Its key innovation is the 'epistemic reward' system, which motivates it to act in ways that reduce its own internal uncertainty about the world."
+                }
+            };
+
+            const demoData = {
+                epistemic: {
+                    description: "A simulation where the agent is placed in an environment with 'safe/known' areas and 'mysterious/unknown' areas. The demo would visualize the agent consistently choosing to explore the unknown areas first, driven by a high internal variance metric (visualized as a real-time chart), even with no external reward. It would then shift to exploiting known reward sources once its uncertainty is reduced.",
+                    diagrams: [
+                        "<b>Epistemic Reward Loop:</b> A diagram showing the ensemble of critic networks, the calculation of variance (σ²Q), and how this variance is fed back as an intrinsic reward (r_int) to the actor.",
+                        "<b>State-Action Value Distribution:</b> A chart visualizing the high variance of Q-value estimates for an unknown state vs. the low variance for a known state."
+                    ]
+                },
+                trace: {
+                    description: "An interactive Jupyter Notebook. The user provides a simple input (e.g., an image of a new object). The notebook then executes one full cognitive loop, cell by cell, showing the output of each module: M1's feature vector, M2's memory update, M3's new/updated concept, M4's graph linkage, and M5's resulting action probability distribution.",
+                    diagrams: [
+                        "<b>Full Cognitive Loop Flowchart:</b> A detailed version of the main architecture diagram, showing data tensor shapes and key transformations between M1 → M2 → M3 → M4 → M5.",
+                        "<b>Data Transformation Cascade:</b> A visual sequence showing how an input image is converted into a vector, then a memory trace, then a graph node, and finally an action."
+                    ]
+                },
+                analogy: {
+                    description: "A challenge-response demo. The system is presented with an analogy problem (e.g., 'Paris is to France as Tokyo is to ?'). The demo visualizes the GAT activating nodes for 'Paris', 'France', and the 'is capital of' relationship. It then queries the graph for a similar relationship connected to 'Tokyo', highlighting the path to the correct answer: 'Japan'.",
+                    diagrams: [
+                        "<b>Knowledge Graph Snippet:</b> A diagram showing concept nodes ('Paris', 'France', 'Tokyo', 'Japan') and relationship edges ('is capital of', 'is in country').",
+                        "<b>Attention Weight Visualization:</b> A heatmap showing the GAT's attention weights, demonstrating how it focuses on the 'is capital of' relationship to solve the analogy."
+                    ]
+                }
+            };
+
+            const moduleCards = document.querySelectorAll('.module-card');
+            const displayTitle = document.getElementById('display-title');
+            const displayTech = document.getElementById('display-tech');
+            const displayDesc = document.getElementById('display-desc');
+            
+            moduleCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const moduleId = card.id;
+                    const data = moduleData[moduleId];
+                    
+                    displayTitle.textContent = data.title;
+                    displayTech.textContent = data.tech;
+                    displayDesc.textContent = data.desc;
+                });
+            });
+
+            // Roadmap Chart
+            const ctx = document.getElementById('roadmap-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Phase 1: Foundation & NLI (S-1)', 'Phase 2: SecDevOps & Core Hardening (S-2)', 'Phase 3: Introspection Prototype (M6/M7)', 'Phase 4: Validation & Alliance Building'],
+                    datasets: [{
+                        label: 'Technology Readiness Level (TRL)',
+                        data: [3, 4, 5, 6],
+                        backgroundColor: [
+                            'rgba(100, 116, 139, 0.6)',
+                            'rgba(71, 85, 105, 0.6)',
+                            'rgba(51, 65, 85, 0.6)',
+                            'rgba(30, 41, 59, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgb(100, 116, 139)',
+                            'rgb(71, 85, 105)',
+                            'rgb(51, 65, 85)',
+                            'rgb(30, 41, 59)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 9,
+                            grid: {
+                                display: false
+                            },
+                             ticks: {
+                                callback: function(value, index, values) {
+                                    return 'TRL ' + value;
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: '#e2e8f0'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Target TRL: ' + context.raw;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Modal Logic
+            const modal = document.getElementById('demo-modal');
+            const modalBg = document.getElementById('modal-bg');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const showDemoBtns = document.querySelectorAll('.show-demo-btn');
+            
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalDiagrams = document.getElementById('modal-diagrams');
+
+            const openModal = (demoId) => {
+                const data = demoData[demoId];
+                modalTitle.textContent = `Suggested Demo: ${document.querySelector(`[data-demo=${demoId}]`).previousElementSibling.previousElementSibling.textContent}`;
+                modalDescription.textContent = data.description;
+                
+                modalDiagrams.innerHTML = '';
+                data.diagrams.forEach(text => {
+                    const li = document.createElement('li');
+                    li.innerHTML = text;
+                    modalDiagrams.appendChild(li);
+                });
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            };
+
+            const closeModal = () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            };
+            
+            showDemoBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    openModal(e.target.dataset.demo);
+                });
+            });
+
+            closeModalBtn.addEventListener('click', closeModal);
+            modalBg.addEventListener('click', closeModal);
+            
+            // Nav scroll highlighting
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('header nav a');
+
+            window.onscroll = () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 120) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active-nav');
+                    link.classList.add('inactive-nav');
+                    if(link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active-nav');
+                        link.classList.remove('inactive-nav');
+                    }
+                });
+            };
+
+        });
+    </script>
+</body>
+</html>
